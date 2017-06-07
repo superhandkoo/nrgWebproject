@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.LeaveMsgMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.LeaveMsg">
+    <id column="lm_id" jdbcType="INTEGER" property="lmId" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="reply_msg" jdbcType="VARCHAR" property="replyMsg" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lm_id, msg, reply_msg, user_id, mobile, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leave_msg
+    where lm_id = #{lmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from leave_msg
+    where lm_id = #{lmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.LeaveMsg">
+    insert into leave_msg (lm_id, msg, reply_msg, 
+      user_id, mobile, name
+      )
+    values (#{lmId,jdbcType=INTEGER}, #{msg,jdbcType=VARCHAR}, #{replyMsg,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.LeaveMsg">
+    insert into leave_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lmId != null">
+        lm_id,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="replyMsg != null">
+        reply_msg,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lmId != null">
+        #{lmId,jdbcType=INTEGER},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="replyMsg != null">
+        #{replyMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.LeaveMsg">
+    update leave_msg
+    <set>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="replyMsg != null">
+        reply_msg = #{replyMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lm_id = #{lmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.LeaveMsg">
+    update leave_msg
+    set msg = #{msg,jdbcType=VARCHAR},
+      reply_msg = #{replyMsg,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where lm_id = #{lmId,jdbcType=INTEGER}
+  </update>
+</mapper>

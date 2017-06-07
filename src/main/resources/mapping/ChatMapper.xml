@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.ChatMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.Chat">
+    <id column="chat_id" jdbcType="INTEGER" property="chatId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    chat_id, user_id, client_name, msg, addtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat
+    where chat_id = #{chatId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chat
+    where chat_id = #{chatId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.Chat">
+    insert into chat (chat_id, user_id, client_name, 
+      msg, addtime)
+    values (#{chatId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.Chat">
+    insert into chat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chatId != null">
+        chat_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="clientName != null">
+        client_name,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chatId != null">
+        #{chatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Chat">
+    update chat
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where chat_id = #{chatId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Chat">
+    update chat
+    set user_id = #{userId,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP}
+    where chat_id = #{chatId,jdbcType=INTEGER}
+  </update>
+</mapper>

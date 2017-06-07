@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.ImagesMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.Images">
+    <id column="IMAGE_ID" jdbcType="INTEGER" property="imageId" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="LINK_ADDRESS" jdbcType="VARCHAR" property="linkAddress" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="TYPE_ID" jdbcType="INTEGER" property="typeId" />
+    <result column="SERIES_NUMBER" jdbcType="INTEGER" property="seriesNumber" />
+    <result column="PREVIEW_URL" jdbcType="VARCHAR" property="previewUrl" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    IMAGE_ID, IMAGE_URL, LINK_ADDRESS, TITLE, TYPE_ID, SERIES_NUMBER, PREVIEW_URL, COLOR, 
+    describe, sort
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from website_images
+    where IMAGE_ID = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website_images
+    where IMAGE_ID = #{imageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.Images">
+    insert into website_images (IMAGE_ID, IMAGE_URL, LINK_ADDRESS, 
+      TITLE, TYPE_ID, SERIES_NUMBER, 
+      PREVIEW_URL, COLOR, describe, 
+      sort)
+    values (#{imageId,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, #{linkAddress,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{seriesNumber,jdbcType=INTEGER}, 
+      #{previewUrl,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.Images">
+    insert into website_images
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        IMAGE_ID,
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL,
+      </if>
+      <if test="linkAddress != null">
+        LINK_ADDRESS,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="typeId != null">
+        TYPE_ID,
+      </if>
+      <if test="seriesNumber != null">
+        SERIES_NUMBER,
+      </if>
+      <if test="previewUrl != null">
+        PREVIEW_URL,
+      </if>
+      <if test="color != null">
+        COLOR,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesNumber != null">
+        #{seriesNumber,jdbcType=INTEGER},
+      </if>
+      <if test="previewUrl != null">
+        #{previewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Images">
+    update website_images
+    <set>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        LINK_ADDRESS = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        TYPE_ID = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesNumber != null">
+        SERIES_NUMBER = #{seriesNumber,jdbcType=INTEGER},
+      </if>
+      <if test="previewUrl != null">
+        PREVIEW_URL = #{previewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        COLOR = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where IMAGE_ID = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Images">
+    update website_images
+    set IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      LINK_ADDRESS = #{linkAddress,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TYPE_ID = #{typeId,jdbcType=INTEGER},
+      SERIES_NUMBER = #{seriesNumber,jdbcType=INTEGER},
+      PREVIEW_URL = #{previewUrl,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where IMAGE_ID = #{imageId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 测试，查询所有的图片表的数据 -->
+  <select id="selectAllImages" resultMap="BaseResultMap">
+  	select * from website_images
+  </select>
+</mapper>

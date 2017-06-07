@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.News">
+    <id column="news_id" jdbcType="INTEGER" property="newsId" />
+    <result column="news_type" jdbcType="VARCHAR" property="newsType" />
+    <result column="news_name" jdbcType="VARCHAR" property="newsName" />
+    <result column="news_introduction" jdbcType="VARCHAR" property="newsIntroduction" />
+    <result column="news_image" jdbcType="VARCHAR" property="newsImage" />
+    <result column="news_address" jdbcType="VARCHAR" property="newsAddress" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.vo.News">
+    <result column="news_html" jdbcType="LONGVARCHAR" property="newsHtml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    news_id, news_type, news_name, news_introduction, news_image, news_address, addtime, 
+    sort
+  </sql>
+  <sql id="Blob_Column_List">
+    news_html
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website_news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.News">
+    insert into website_news (news_id, news_type, news_name, 
+      news_introduction, news_image, news_address, 
+      addtime, sort, news_html
+      )
+    values (#{newsId,jdbcType=INTEGER}, #{newsType,jdbcType=VARCHAR}, #{newsName,jdbcType=VARCHAR}, 
+      #{newsIntroduction,jdbcType=VARCHAR}, #{newsImage,jdbcType=VARCHAR}, #{newsAddress,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{newsHtml,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.News">
+    insert into website_news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="newsId != null">
+        news_id,
+      </if>
+      <if test="newsType != null">
+        news_type,
+      </if>
+      <if test="newsName != null">
+        news_name,
+      </if>
+      <if test="newsIntroduction != null">
+        news_introduction,
+      </if>
+      <if test="newsImage != null">
+        news_image,
+      </if>
+      <if test="newsAddress != null">
+        news_address,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="newsHtml != null">
+        news_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="newsId != null">
+        #{newsId,jdbcType=INTEGER},
+      </if>
+      <if test="newsType != null">
+        #{newsType,jdbcType=VARCHAR},
+      </if>
+      <if test="newsName != null">
+        #{newsName,jdbcType=VARCHAR},
+      </if>
+      <if test="newsIntroduction != null">
+        #{newsIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="newsImage != null">
+        #{newsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsAddress != null">
+        #{newsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="newsHtml != null">
+        #{newsHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.News">
+    update website_news
+    <set>
+      <if test="newsType != null">
+        news_type = #{newsType,jdbcType=VARCHAR},
+      </if>
+      <if test="newsName != null">
+        news_name = #{newsName,jdbcType=VARCHAR},
+      </if>
+      <if test="newsIntroduction != null">
+        news_introduction = #{newsIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="newsImage != null">
+        news_image = #{newsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsAddress != null">
+        news_address = #{newsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="newsHtml != null">
+        news_html = #{newsHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nrg.vo.News">
+    update website_news
+    set news_type = #{newsType,jdbcType=VARCHAR},
+      news_name = #{newsName,jdbcType=VARCHAR},
+      news_introduction = #{newsIntroduction,jdbcType=VARCHAR},
+      news_image = #{newsImage,jdbcType=VARCHAR},
+      news_address = #{newsAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      news_html = #{newsHtml,jdbcType=LONGVARCHAR}
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.News">
+    update website_news
+    set news_type = #{newsType,jdbcType=VARCHAR},
+      news_name = #{newsName,jdbcType=VARCHAR},
+      news_introduction = #{newsIntroduction,jdbcType=VARCHAR},
+      news_image = #{newsImage,jdbcType=VARCHAR},
+      news_address = #{newsAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER}
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+</mapper>

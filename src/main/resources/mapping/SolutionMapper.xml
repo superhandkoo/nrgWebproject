@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.SolutionMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.Solution">
+    <id column="solution_id" jdbcType="INTEGER" property="solutionId" />
+    <result column="solution_type" jdbcType="VARCHAR" property="solutionType" />
+    <result column="solution_name" jdbcType="VARCHAR" property="solutionName" />
+    <result column="solution_introduction" jdbcType="VARCHAR" property="solutionIntroduction" />
+    <result column="solution_image" jdbcType="VARCHAR" property="solutionImage" />
+    <result column="solution_address" jdbcType="VARCHAR" property="solutionAddress" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.vo.Solution">
+    <result column="solution_html" jdbcType="LONGVARCHAR" property="solutionHtml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    solution_id, solution_type, solution_name, solution_introduction, solution_image, 
+    solution_address, addtime, sort
+  </sql>
+  <sql id="Blob_Column_List">
+    solution_html
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_solution
+    where solution_id = #{solutionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website_solution
+    where solution_id = #{solutionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.Solution">
+    insert into website_solution (solution_id, solution_type, solution_name, 
+      solution_introduction, solution_image, solution_address, 
+      addtime, sort, solution_html
+      )
+    values (#{solutionId,jdbcType=INTEGER}, #{solutionType,jdbcType=VARCHAR}, #{solutionName,jdbcType=VARCHAR}, 
+      #{solutionIntroduction,jdbcType=VARCHAR}, #{solutionImage,jdbcType=VARCHAR}, #{solutionAddress,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{solutionHtml,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.Solution">
+    insert into website_solution
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="solutionId != null">
+        solution_id,
+      </if>
+      <if test="solutionType != null">
+        solution_type,
+      </if>
+      <if test="solutionName != null">
+        solution_name,
+      </if>
+      <if test="solutionIntroduction != null">
+        solution_introduction,
+      </if>
+      <if test="solutionImage != null">
+        solution_image,
+      </if>
+      <if test="solutionAddress != null">
+        solution_address,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="solutionHtml != null">
+        solution_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="solutionId != null">
+        #{solutionId,jdbcType=INTEGER},
+      </if>
+      <if test="solutionType != null">
+        #{solutionType,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionName != null">
+        #{solutionName,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionIntroduction != null">
+        #{solutionIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionImage != null">
+        #{solutionImage,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionAddress != null">
+        #{solutionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="solutionHtml != null">
+        #{solutionHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Solution">
+    update website_solution
+    <set>
+      <if test="solutionType != null">
+        solution_type = #{solutionType,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionName != null">
+        solution_name = #{solutionName,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionIntroduction != null">
+        solution_introduction = #{solutionIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionImage != null">
+        solution_image = #{solutionImage,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionAddress != null">
+        solution_address = #{solutionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="solutionHtml != null">
+        solution_html = #{solutionHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where solution_id = #{solutionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nrg.vo.Solution">
+    update website_solution
+    set solution_type = #{solutionType,jdbcType=VARCHAR},
+      solution_name = #{solutionName,jdbcType=VARCHAR},
+      solution_introduction = #{solutionIntroduction,jdbcType=VARCHAR},
+      solution_image = #{solutionImage,jdbcType=VARCHAR},
+      solution_address = #{solutionAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      solution_html = #{solutionHtml,jdbcType=LONGVARCHAR}
+    where solution_id = #{solutionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Solution">
+    update website_solution
+    set solution_type = #{solutionType,jdbcType=VARCHAR},
+      solution_name = #{solutionName,jdbcType=VARCHAR},
+      solution_introduction = #{solutionIntroduction,jdbcType=VARCHAR},
+      solution_image = #{solutionImage,jdbcType=VARCHAR},
+      solution_address = #{solutionAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER}
+    where solution_id = #{solutionId,jdbcType=INTEGER}
+  </update>
+</mapper>

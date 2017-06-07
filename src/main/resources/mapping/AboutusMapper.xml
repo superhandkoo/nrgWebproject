@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.AboutusMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.Aboutus">
+    <id column="aboutus_id" jdbcType="INTEGER" property="aboutusId" />
+    <result column="aboutus_type" jdbcType="VARCHAR" property="aboutusType" />
+    <result column="aboutus_name" jdbcType="VARCHAR" property="aboutusName" />
+    <result column="aboutus_introduction" jdbcType="VARCHAR" property="aboutusIntroduction" />
+    <result column="aboutus_address" jdbcType="VARCHAR" property="aboutusAddress" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.vo.Aboutus">
+    <result column="aboutus_html" jdbcType="LONGVARCHAR" property="aboutusHtml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aboutus_id, aboutus_type, aboutus_name, aboutus_introduction, aboutus_address, addtime, 
+    sort
+  </sql>
+  <sql id="Blob_Column_List">
+    aboutus_html
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_aboutus
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website_aboutus
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.Aboutus">
+    insert into website_aboutus (aboutus_id, aboutus_type, aboutus_name, 
+      aboutus_introduction, aboutus_address, addtime, 
+      sort, aboutus_html)
+    values (#{aboutusId,jdbcType=INTEGER}, #{aboutusType,jdbcType=VARCHAR}, #{aboutusName,jdbcType=VARCHAR}, 
+      #{aboutusIntroduction,jdbcType=VARCHAR}, #{aboutusAddress,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{aboutusHtml,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.Aboutus">
+    insert into website_aboutus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aboutusId != null">
+        aboutus_id,
+      </if>
+      <if test="aboutusType != null">
+        aboutus_type,
+      </if>
+      <if test="aboutusName != null">
+        aboutus_name,
+      </if>
+      <if test="aboutusIntroduction != null">
+        aboutus_introduction,
+      </if>
+      <if test="aboutusAddress != null">
+        aboutus_address,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="aboutusHtml != null">
+        aboutus_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aboutusId != null">
+        #{aboutusId,jdbcType=INTEGER},
+      </if>
+      <if test="aboutusType != null">
+        #{aboutusType,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusName != null">
+        #{aboutusName,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusIntroduction != null">
+        #{aboutusIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusAddress != null">
+        #{aboutusAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="aboutusHtml != null">
+        #{aboutusHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Aboutus">
+    update website_aboutus
+    <set>
+      <if test="aboutusType != null">
+        aboutus_type = #{aboutusType,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusName != null">
+        aboutus_name = #{aboutusName,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusIntroduction != null">
+        aboutus_introduction = #{aboutusIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutusAddress != null">
+        aboutus_address = #{aboutusAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="aboutusHtml != null">
+        aboutus_html = #{aboutusHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nrg.vo.Aboutus">
+    update website_aboutus
+    set aboutus_type = #{aboutusType,jdbcType=VARCHAR},
+      aboutus_name = #{aboutusName,jdbcType=VARCHAR},
+      aboutus_introduction = #{aboutusIntroduction,jdbcType=VARCHAR},
+      aboutus_address = #{aboutusAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      aboutus_html = #{aboutusHtml,jdbcType=LONGVARCHAR}
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Aboutus">
+    update website_aboutus
+    set aboutus_type = #{aboutusType,jdbcType=VARCHAR},
+      aboutus_name = #{aboutusName,jdbcType=VARCHAR},
+      aboutus_introduction = #{aboutusIntroduction,jdbcType=VARCHAR},
+      aboutus_address = #{aboutusAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER}
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </update>
+</mapper>

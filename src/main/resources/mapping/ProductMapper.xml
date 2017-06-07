@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.Product">
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_introduction" jdbcType="VARCHAR" property="productIntroduction" />
+    <result column="product_image" jdbcType="VARCHAR" property="productImage" />
+    <result column="product_address" jdbcType="VARCHAR" property="productAddress" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.vo.Product">
+    <result column="product_html" jdbcType="LONGVARCHAR" property="productHtml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    product_id, product_type, product_name, product_introduction, product_image, product_address, 
+    addtime, sort
+  </sql>
+  <sql id="Blob_Column_List">
+    product_html
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.Product">
+    insert into website_product (product_id, product_type, product_name, 
+      product_introduction, product_image, product_address, 
+      addtime, sort, product_html
+      )
+    values (#{productId,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productIntroduction,jdbcType=VARCHAR}, #{productImage,jdbcType=VARCHAR}, #{productAddress,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{productHtml,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.Product">
+    insert into website_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productIntroduction != null">
+        product_introduction,
+      </if>
+      <if test="productImage != null">
+        product_image,
+      </if>
+      <if test="productAddress != null">
+        product_address,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="productHtml != null">
+        product_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroduction != null">
+        #{productIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null">
+        #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productAddress != null">
+        #{productAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="productHtml != null">
+        #{productHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Product">
+    update website_product
+    <set>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntroduction != null">
+        product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null">
+        product_image = #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productAddress != null">
+        product_address = #{productAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="productHtml != null">
+        product_html = #{productHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nrg.vo.Product">
+    update website_product
+    set product_type = #{productType,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+      product_image = #{productImage,jdbcType=VARCHAR},
+      product_address = #{productAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      product_html = #{productHtml,jdbcType=LONGVARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Product">
+    update website_product
+    set product_type = #{productType,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+      product_image = #{productImage,jdbcType=VARCHAR},
+      product_address = #{productAddress,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>

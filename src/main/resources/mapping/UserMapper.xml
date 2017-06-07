@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.nrg.vo.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="job_number" jdbcType="VARCHAR" property="jobNumber" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, name, job_number, password, mobile, addtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nrg.vo.User">
+    insert into user (user_id, name, job_number, 
+      password, mobile, addtime
+      )
+    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{jobNumber,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nrg.vo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="jobNumber != null">
+        job_number,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNumber != null">
+        #{jobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNumber != null">
+        job_number = #{jobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      job_number = #{jobNumber,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
