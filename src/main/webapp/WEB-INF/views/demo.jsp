@@ -2,26 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../public/header_top.jsp"%>
 <%@include file="../public/header_middle.jsp"%>
-
-
-<table class="table table-bordered">
-	<caption>图片表中的数据</caption>
-	<thead>
-		<tr>
-			<th>imageId</th>
-			<th>imageUrl</th>
-			<th>linkAddress</th>
-			<th>title</th>
-			<th>typeId</th>
-			<th>seriesNumber</th>
-			<th>previewUrl</th>
-			<th>color</th>
-			<th>describe</th>
-			<th>sort</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach varStatus="status" items="d">
+<div class="container">
+	<table class="table table-bordered">
+		<caption>图片表中的数据</caption>
+		<thead>
+			<tr>
+				<th>imageId</th>
+				<th>imageUrl</th>
+				<th>linkAddress</th>
+				<th>title</th>
+				<th>typeId</th>
+				<th>seriesNumber</th>
+				<th>previewUrl</th>
+				<th>color</th>
+				<th>describe</th>
+				<th>sort</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach varStatus="status" var="d" items="${pageBean.rows}">
 			<tr>
 				<td>${d.imageId }</td>
 				<td>${d.imageUrl }</td>
@@ -36,5 +35,29 @@
 			</tr>
 		</c:forEach>
 	</tbody>
-</table>
+	<tfoot>
+		<tr>
+			<td colspan="10" style="text-align:center;">
+					<div class="M-box1"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div> 
+<script>
+	$(function(){
+		$('.M-box1').pagination({
+		    totalData:${pageBean.total},
+		    pageCount:${pageBean.pages},
+		    showData:5,
+		    current:${pageBean.pageNo},
+		    keepShowPN:true, 
+		    coping:false,
+		    callback:function(api){
+		        var page = api.getCurrent(); 
+		        window.location.href="<%=request.getContextPath()%>/demo/img?pageNo="+page+"&pageSize="+5;
+		    }    
+	   });
+	});
+</script>
 <%@include file="../public/footer_bottom.jsp"%>

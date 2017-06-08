@@ -30,7 +30,7 @@ public class DemoServiceImpl implements IDemoService{
 	@Override
 	public PagedResult<Images> queryAllImage(Integer pageNo, Integer pageSize) {
 		pageNo = pageNo == null ? 1 : pageNo;
-		pageSize = pageSize == null ? 10 : pageSize;
+		pageSize = pageSize == null ? 5 : pageSize;
 		PageHelper.startPage(pageNo, pageSize);
 		return BeanUtil.topagedResult(daoFactory.getImagesMapper().selectAllImages()); 
 	} 
