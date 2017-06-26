@@ -8,10 +8,8 @@ import javax.websocket.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nrg.chatServer.client.BridgeClient;
-
 public class UserPool {
-	private static Logger logger=LoggerFactory.getLogger(BridgeClient.class);
+	private static Logger logger=LoggerFactory.getLogger(UserPool.class);
 	
 	private static Map<String,Object> USER_POOL=new HashMap<String,Object>();
 	

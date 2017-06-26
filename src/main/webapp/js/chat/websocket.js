@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://localhost:8080/init");
+var socket = new WebSocket("ws://localhost:8080/nrg-0.0.1-SNAPSHOT/init");
 
 $(function() {
 	listen();
@@ -6,6 +6,9 @@ $(function() {
 
 function emit() {
 	var text = encodeScript($("#msg").val());
+	if($.trim(text)==null||$.trim(text)==undefined||$.trim(text)==''){
+		return;
+	}
 	var msg = {
 		"message" : text,
 		"color" : "#CECECE",

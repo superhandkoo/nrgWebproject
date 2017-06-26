@@ -10,9 +10,11 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.nrg.chatServer.common.Message;
 import com.nrg.chatServer.common.UserPool;
+import com.nrg.chatServer.proxy.MessageProxy;
 
-@ServerEndpoint("init")
+@ServerEndpoint("/init")
 public class BridgeClient {
 	private static Logger logger=LoggerFactory.getLogger(BridgeClient.class);
 	
@@ -26,6 +28,8 @@ public class BridgeClient {
 	public void onMessage(String message,Session session){
 		logger.info("user [" + session.getId() + "] Received: "+message);
 		System.out.println(message);
+        //给所有用户发送消息
+        MessageProxy.getInstance().getProxy(Message.class).sendAllUsers(message, session);
 	}
 	
 	@OnError
