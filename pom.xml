@@ -7,6 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nrg Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	
 	<!-- 配置propertiest -->
 	<properties>
 		<!-- 项目的build的编码 -->
@@ -44,9 +46,14 @@
 		<sfjson.version>2.3</sfjson.version>
 		<!-- jackson版本 -->
 		<jackson.version>1.9.13</jackson.version>
+		
+
+	
+		
 	</properties>
 	<!-- 配置依赖 -->
 	<dependencies>
+	
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -243,8 +250,31 @@
 						<target>1.8</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
-				</plugin>
+					</plugin>
+					
+						<plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+        <url>http://localhost:8080/manager/text</url>
+        <server>tomcatserver</server>
+        <path>/nrg</path>
+        <username>admin</username>
+        <password>admin</password>
+          </configuration>
+            </plugin>
+			
 			</plugins>
+			
 		</pluginManagement>
+
+		
+		
 	</build>
+
+
+
+	
+	
 </project>

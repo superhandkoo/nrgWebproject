@@ -43,7 +43,7 @@
 	<!-- 配置Spring MVC servlet的映射地址 -->
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<!-- 设置Session失效的时间 -->
 	<session-config>
@@ -51,6 +51,6 @@
 	</session-config>
 	<!-- 配置欢迎页 -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
