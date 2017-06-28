@@ -41,7 +41,7 @@ public class bannerImagecontroller {
 	 public bannerImagecontroller() {} 
 	 @RequestMapping(value = "/index", method = RequestMethod.GET)  
 	    public String adminIndex(Model model) {
-		    return "/views/adminlogin/index.jsp";  
+		    return "/adminlogin/index";  
 	    }
 	  
 	  @RequestMapping(value = "/BannerList", method = RequestMethod.GET)  
@@ -53,11 +53,11 @@ public class bannerImagecontroller {
 		  //  model.addAttribute("blist",blist);
 		    
 		    
-	        return "/views/adminlogin/BannerList.jsp";  
+	        return "/adminlogin/BannerList";  
 	    }
 	  @RequestMapping(value = "/toBannerupdate", method = RequestMethod.GET)
 	  public String Bannerupdate(Model model) {    
-	        return "/views/adminlogin/update_banner.jsp";  
+	        return "/adminlogin/update_banner";  
 	    }
 	  
 		

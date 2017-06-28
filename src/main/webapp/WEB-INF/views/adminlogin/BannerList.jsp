@@ -81,7 +81,7 @@
         <td class="sorting_1">${blist.seriesNum }</td>
         <td class="sorting_1">删除 |<a data-toggle="modal"    data-target="#banner_update" class="btn btn-primary btn-large">编辑</a>
         <!-- 
-        <a href="/springmvc/admin/toBannerupdate.do">编辑</a></td></tr>
+        <a href="/nrg/admin/toBannerupdate.do">编辑</a></td></tr>
       -->
     
     </c:forEach>
@@ -115,7 +115,7 @@
         
       
         <div class="modal-body">
-          <iframe  id="iframeq_windows"  src="/springmvc/admin/toBannerupdate.do" style="width:100%;height:600px;border: none;">
+          <iframe  id="iframeq_windows"  src="/nrg/admin/toBannerupdate.do" style="width:100%;height:600px;border: none;">
           </iframe>       
 </div>
         <div class="modal-footer">

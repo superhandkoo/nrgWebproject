@@ -36,34 +36,34 @@
           </a>
           <a class="brand" href="#">Admin</a>
           <div class="btn-group pull-right">
-			<a class="btn" href="/springmvc/my-profile.do"><i class="icon-user"></i> Admin</a>
+			<a class="btn" href="/nrg/my-profile.do"><i class="icon-user"></i> Admin</a>
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-			  <li><a href="/springmvc/my-profile.do">个人资料</a></li>
+			  <li><a href="/nrg/my-profile.do">个人资料</a></li>
               <li class="divider"></li>
               <li><a href="#">退出</a></li>
             </ul>
           </div>
           <div class="nav-collapse">
             <ul class="nav">
-			<li><a href="/springmvc/admin.do">首页</a></li>
+			<li><a href="/nrg/admin.do">首页</a></li>
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="/springmvc/new-user.do">新建用户</a></li>
+					<li><a href="/nrg/new-user.do">新建用户</a></li>
 					<li class="divider"></li>
-					<li><a href="/springmvc/users.do">管理用户</a></li>
+					<li><a href="/nrg/users.do">管理用户</a></li>
 				</ul>
 			  </li>
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">角色 <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="/springmvc/new-role.do">新建角色</a></li>
+					<li><a href="/nrg/new-role.do">新建角色</a></li>
 					<li class="divider"></li>
-					<li><a href="/springmvc/roles.do">管理角色</a></li>
+					<li><a href="/nrg/roles.do">管理角色</a></li>
 				</ul>
 			  </li>
-			  <li><a href="/springmvc/stats.do">统计</a></li>
+			  <li><a href="/nrg/stats.do">统计</a></li>
             </ul>
           </div>
         </div>
@@ -76,17 +76,17 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header"><i class="icon-wrench"></i>banner管理</li>
-             <!-- <li><a href="/springmvc/users.do">用户</a></li>
-              <li><a href="/springmvc/roles.do">角色</a></li>  -->
-              <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/springmvc/admin/BannerList.do">宣传图片</a></li>
+             <!-- <li><a href="/nrg/users.do">用户</a></li>
+              <li><a href="/nrg/roles.do">角色</a></li>  -->
+              <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/BannerList.do">宣传图片</a></li>
               <li class="nav-header"><i class="icon-signal"></i> 商品管理</li>
-              <!--<li class="active"><a href="/springmvc/stats.do">通用</a></li>
-              <li><a href="/springmvc/user-stats.do">用户</a></li>
-               <li><a href="/springmvc/visitor-stats.do">访问者</a></li>-->
-              <li><a href="/springmvc/roles.do">我的商品</a></li>
+              <!--<li class="active"><a href="/nrg/stats.do">通用</a></li>
+              <li><a href="/nrg/user-stats.do">用户</a></li>
+               <li><a href="/nrg/visitor-stats.do">访问者</a></li>-->
+              <li><a href="/nrg/roles.do">我的商品</a></li>
              
               <li class="nav-header"><i class="icon-user"></i> 新闻管理</li>
-              <li><a href="/springmvc/my-profile.do">新闻编辑</a></li>
+              <li><a href="/nrg/my-profile.do">新闻编辑</a></li>
               <li><a href="#">设置</a></li>
 			  <li><a href="#">退出</a></li> 
             </ul>

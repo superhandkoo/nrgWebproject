@@ -22,68 +22,68 @@ public class RestConstroller {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)  
     public String registPost() {  
     	
-        return "/views/welcome.jsp";  
+        return "/welcome";  
     }
     
   
     @RequestMapping(value = "/information", method = RequestMethod.GET)  
     public String information() {  
     	
-        return "/views/information.jsp";  
+        return "/information";  
     }
     @RequestMapping(value = "/case", method = RequestMethod.GET)  
     public String Case() {  
     	
-        return "/views/case.jsp";  
+        return "/case";  
     }
     @RequestMapping(value = "/about", method = RequestMethod.GET)  
     public String about() {  
     	
-        return "/views/about.jsp";  
+        return "/about";  
     }
     
     @RequestMapping(value = "/my-profile", method = RequestMethod.GET)  
     public String myProfile() {  
     	
-        return "/views/adminlogin/my-profile.jsp";  
+        return "/adminlogin/my-profile";  
     }
     @RequestMapping(value = "/admin", method = RequestMethod.GET)  
     public String admin() {  
     	
-        return "/views/adminlogin/index.jsp";  
+        return "/adminlogin/index";  
     } 
     public String newUser() {  
     	
-        return "/views/adminlogin/new-user.jsp";  
+        return "/adminlogin/new-user";  
     }
     @RequestMapping(value = "/stats", method = RequestMethod.GET)  
     public String stats() {  
     	
-        return "/views/adminlogin/stats.jsp";  
+        return "/adminlogin/stats";  
     }
     @RequestMapping(value = "/user-stats", method = RequestMethod.GET)  
     public String userstats() {  
     	
-        return "/views/adminlogin/user-stats.jsp";  
+        return "/adminlogin/user-stats";  
     }
     @RequestMapping(value = "/users", method = RequestMethod.GET)  
     public String users() {  
     	
-        return "/views/adminlogin/users.jsp";  
+        return "/adminlogin/users";  
     }
     @RequestMapping(value = "/new-role", method = RequestMethod.GET)  
     public String newrole() {  
     	
-        return "/views/adminlogin/new-role.jsp";  
+        return "/adminlogin/new-role";  
     }
     @RequestMapping(value = "/roles", method = RequestMethod.GET)  
     public String roles() {  
     	
-        return "/views/adminlogin/roles.jsp";  
+        return "/adminlogin/roles";  
     }
     @RequestMapping(value = "/visitor-stats", method = RequestMethod.GET)  
     public String visitorstats() {  
     	
-        return "/views/adminlogin/visitor-stats.jsp";  
+        return "/adminlogin/visitor-stats";  
     }
 }
