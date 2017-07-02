@@ -1,0 +1,27 @@
+/***********************************************xiaoyuan*****************************************************************************************/
+
+.graybg {}
+
+.recommond{ }
+
+.recommond .slider{height:250px; width:940px; margin:0 auto;}
+.recommond .slider .item{width:190px; height:250px; position:relative; float:left; overflow:hidden;cursor: pointer;}
+.recommond .slider .item img{ float:right;position: absolute; right:0px;}
+.recommond .slider .item .para.i1{ background-color:#4298ff;}
+.recommond .slider .item .para.i2{ background-color:#176fd7;}
+.recommond .slider .item .para.i3{ background-color:#0049a0;}
+.recommond .slider .item .para{width:190px; position:absolute; height:100%; z-index:2; left:0;top:0; overflow:hidden; word-break:break-all;}
+.recommond .slider .item .para b{ display:inline-block;width:67px;height:57px; z-index:9; position:absolute; top:auto;left:auto;right:0;bottom:0; background:url(../images/ic.png);}
+
+.recommond .slider .item.active{}
+.recommond .slider .item.active .para{ background:url(../images/abg.png) left center no-repeat;width: 283px;}
+.recommond .slider .item.active .para b{background:url(../images/ic_ac.png) left center no-repeat;}
+.recommond .slider .item.active .para .main h4,.recommond .slider .item.active .para .main a,.recommond .slider .item.active .para .main p{ display:block;}
+
+.recommond .slider .item .para .main{ padding:25px; color:#fff;}
+.recommond .slider .item .para .main h3{font-size:16px;letter-spacing:2px;}
+.recommond .slider .item .para .main h4{font-size:16px;}
+.recommond .slider .item .para .main p{font-size:12px; display:none; padding-top:10px; line-height:20px;}
+.more{}
+.recommond .slider .item .para .main a{ color:#191919; font-size:12px; display:block; height:30px; line-height:30px; width:60px; padding-left:10px; background:url(../images/more.png) no-repeat center left; margin-top:10px;display:none;}
+.recommond .slider .item .para .main a:link,.recommond .slider .item .para .main a:visited{ color:#191919;}
