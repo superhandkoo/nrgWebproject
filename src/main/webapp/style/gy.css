@@ -4,8 +4,8 @@
 body {font-family:Microsoft Yahei; font-size: 12px; margin:0px; padding:0px; color: #1b1b1b; background-color:#fff; }
 * { margin:0px; padding:0px; border:0px;}
 ul,li {list-style-type:none; margin:0px; padding:0px;}
-a {text-decoration:none; outline:none;   noFocusLine: expression(this.onFocus = this.blur())/*鍘绘帀閾炬帴铏氱嚎妗�/;}
-input{border:0;outline:none;font-family:Microsoft Yahei; /*鍘婚櫎杈规*/}
+a {text-decoration:none; outline:none;   noFocusLine: expression(this.onFocus = this.blur());}
+input{border:0;outline:none;font-family:Microsoft Yahei;}
 
 img {border:0px;}
 .fl {float:left;}
