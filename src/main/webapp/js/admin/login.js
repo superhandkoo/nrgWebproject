@@ -37,6 +37,7 @@ $(function(){
 			});
 			return false;
 		}
+		
 		var url="/nrg/admin/loginExcute.do";
 		$.ajax({
 			url:url,
@@ -61,6 +62,86 @@ $(function(){
 			}
 		});
 		
+	});
+	var reMethod = "GET",
+	pwdmin = 6;
+	//用户注册
+	$("#registForm").on("submit",function(event){
+		event.preventDefault();
+		var username=$.trim($("#user").val());
+		var password=$.trim($("#passwd").val());
+		var password2=$.trim($("#passwd2").val());
+		var mobile=$.trim($("#mobile").val());
+		//判断
+		if(username==null||username==""||username==undefined){
+			layer.msg("请填写用户名",function(){
+				$("#user").focus();
+			});
+			return false;
+		}
+		if(user.length<4||user.length>16){
+			layer.msg("用户名为4-16字符",function(){
+				$("#user").focus();
+			});
+			return false;
+		}
+		if(password==null||password==""||password==undefined){
+			layer.msg("请填写用户密码",function(){
+				$("#passwd").focus();
+			});
+			return false;
+		}
+		if(password.length<pwdmin){
+			layer.msg("密码不能小于"+pwdmin+"位",function(){
+				$("#user").focus();
+			});
+			return false;
+		}
+		if(password2==null||password2==""||password2==undefined){
+			layer.msg("两次密码不一致",function(){
+				$("#passwd2").focus();
+			});
+			return false;
+		}
+		if (password != password2) {
+			layer.msg("两次密码不一致",function(){
+				$("#passwd2").focus();
+			});
+			return false;
+		}
+		//mobile
+		var smobile = /^1[3|4|5|8][0-9]\d{4,8}$/;
+		if (!smobile.test(mobile) || mobile.length != 11 ) {
+			layer.msg("手机号格式不正确",function(){
+				$("#passwd2").focus();
+			});
+			return false;
+		}
+		
+		var url="/nrg/admin/registExcute.do";
+		$.ajax({
+			url:url,
+			type:"post",
+			data:{
+				"username":username,
+				"password":password,
+				"mobile":mobile
+			},
+			dataType:"json"
+		}).done(function(data){
+			var flag=data.flag;
+			var message=data.message;
+			console.log(message);
+			if(flag){
+				layer.msg("注册成功",function(){
+					//添加跳转
+				});
+			}else{
+				layer.msg(message,function(){
+					$("#username").focus();
+				});
+			}
+		});
 	});
 	
 });
@@ -95,10 +176,9 @@ function getParam(pname) {
 }  
 
 
-var reMethod = "GET",
-	pwdmin = 6;
 
-$(document).ready(function() {
+
+/*$(document).ready(function() {
 
 
 	$('#reg').click(function() {
@@ -172,4 +252,4 @@ $(document).ready(function() {
 	});
 	
 
-});
+});*/

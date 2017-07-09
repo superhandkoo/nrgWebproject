@@ -1,5 +1,6 @@
 package com.nrg.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +26,19 @@ public class AdminController {
 	@Autowired
 	private ServiceFactory serviceFactory;
 	
+	/**
+	 * 跳转后台登录页面
+	 * @return
+	 */
 	@RequestMapping("/loginWeb")
 	public String toLoginWeb(){
 		return "/adminlogin/loginWeb";
 	}
-	
+	/**
+	 * 后台执行登录
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping("/loginExcute")
 	@ResponseBody
 	public Map<String, Object> loginExcute(HttpServletRequest req){
@@ -51,5 +60,60 @@ public class AdminController {
 		}
 		return map;
 	}
+	
+	/**
+	 * 后台注册
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/registExcute")
+	@ResponseBody
+	public Map<String, Object> registExcute(HttpServletRequest req){
+		Map<String, Object> map=new HashMap<String, Object>();
+		try {
+			//用户名唯一性检测
+			String userName=req.getParameter("username");
+			Boolean userNameFlag=serviceFactory.getUserService().checkUserName(userName);
+			if(userNameFlag){
+				map.put("flag",false );
+				map.put("message", "您的用户名已被注册");
+				return map;
+			}
+			//手机号唯一性检测
+			String mobile=req.getParameter("mobile");
+			Boolean mobileFlag=serviceFactory.getUserService().checkMobile(mobile);
+			if(mobileFlag){
+				map.put("flag",false );
+				map.put("message", "您的手机已被注册");
+				return map;
+			}
+			//
+			String password=req.getParameter("password");
+			User user =new User();
+			user.setAddtime(new Date());
+			user.setMobile(mobile);
+			user.setName(userName);
+			user.setPassword(password);
+			serviceFactory.getUserService().createUser(user);
+			System.out.println("id:"+user.getUserId());
+			//防入缓存
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("flag", false);
+			map.put("message", "未知错误,请稍后重试");
+		}
+		return map;
+	}
+	
 	
 }

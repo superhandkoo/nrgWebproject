@@ -12,6 +12,7 @@
   <sql id="Base_Column_List">
     user_id, name, job_number, password, mobile, addtime
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -22,13 +23,16 @@
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nrg.vo.User">
+  <insert id="insert" parameterType="com.nrg.vo.User"  >
     insert into user (user_id, name, job_number, 
       password, mobile, addtime
       )
     values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{jobNumber,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}
       )
+      <selectKey keyProperty="userId" resultType="int">
+			select last_insert_id() as userId
+		</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.nrg.vo.User">
     insert into user
@@ -106,6 +110,16 @@
   <select id="getUserCount" parameterType="com.nrg.vo.User" resultType="int">
   	select count(1)
   	from user
-  	where user.name=#{name} and user.password=#{password}
+  	<where>
+  		<if test="name !=null and name!='' ">
+  			and user.name=#{name}
+  		</if>
+  		<if test="password !=null and password !=''">
+  			and user.password=#{password}
+  		</if>
+  		<if test="mobile !=null and mobile !=''">
+  			and user.mobile=#{mobile}
+  		</if>
+  	</where>
   </select>
 </mapper>

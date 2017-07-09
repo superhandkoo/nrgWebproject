@@ -48,12 +48,11 @@
 		<!--登录end-->
   	</div>
   	<!--注册-->
-    <div class="qlogin" id="qlogin" style="display: none; ">
-    	<div class="web_login">
-	    	<form name="form2" id="regUser" accept-charset="utf-8"  action="" method="post">
+    <div class="qlogin" id="qlogin" style="display: none;margin-top:30px;">
+    	<div class="web_login" id="registForm">
+	    	<form name="form2" id="regUser" accept-charset="utf-8"  action="javascript:return true;" method="post">
 		    	<input type="hidden" name="to" value="reg"/>
 	        	<ul class="reg_form" id="reg-ul">
-	        		<div id="userCue" class="cue">快速注册请注意格式</div>
 	               	<li>
 						<label for="user"  class="input-tips2">用户名：</label>
 						<div class="inputOuter2">
@@ -73,14 +72,14 @@
 	                    </div>
 	                </li>
 	                <li>
-	                 <label for="qq" class="input-tips2">QQ：</label>
+	                 <label for="mobile" class="input-tips2">手机号：</label>
 	                    <div class="inputOuter2">
-	                        <input type="text" id="qq" name="qq" maxlength="10" class="inputstyle2"/>
+	                        <input type="text" id="mobile" name="mobile" maxlength="11" class="inputstyle2"/>
 	                    </div>
 	                </li>
 	                <li>
 	                    <div class="inputArea">
-	                        <input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
+	                        <input type="submit" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
 	                    </div>
 	                </li>
 	                <div class="cl"></div>
@@ -93,6 +92,6 @@
 <div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
 <!-- jquery -->
 <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="../js/admin/login.js?v=12325"></script>
+<script type="text/javascript" src="../js/admin/login.js?v=233"></script>
 <script type="text/javascript" src="../js/layer/layer.js"></script>
 </body></html>

@@ -9,4 +9,18 @@ public interface IUserService {
 	 * @return
 	 */
 	public Boolean checkLoginUser(User user);
+	/**
+	 * 用户名唯一性检测
+	 * @param userName
+	 * @return
+	 */
+	public Boolean checkUserName(String userName);
+	/**
+	 * 手机号唯一性检测
+	 * @param mobile
+	 * @return
+	 */
+	public Boolean checkMobile(String mobile);
+	
+	public int createUser(User user);
 }
