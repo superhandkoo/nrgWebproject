@@ -45,7 +45,7 @@ public class AdminController {
 		Map<String, Object> map=new HashMap<String, Object>();
 		User user=new User();
 		user.setName(req.getParameter("username"));
-		user.setPassword(req.getParameter("password"));
+		user.setPassword(req.getParameter("password").substring(8,16));
 		Boolean flag=false;
 		try {
 			flag = serviceFactory.getUserService().checkLoginUser(user);
@@ -88,7 +88,7 @@ public class AdminController {
 				return map;
 			}
 			//
-			String password=req.getParameter("password");
+			String password=req.getParameter("password").substring(8,16);
 			User user =new User();
 			user.setAddtime(new Date());
 			user.setMobile(mobile);
