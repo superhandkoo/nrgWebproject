@@ -92,6 +92,7 @@
 <div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
 <!-- jquery -->
 <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="../js/admin/login.js?v=233"></script>
+<script type="text/javascript" src="../js/admin/login.js?v=2333"></script>
 <script type="text/javascript" src="../js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/md5.js"></script>
 </body></html>

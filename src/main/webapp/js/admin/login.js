@@ -44,7 +44,7 @@ $(function(){
 			type:"post",
 			data:{
 				"username":name,
-				"password":pass
+				"password":_md5(pass)
 			},
 			dataType:"json"
 		}).done(function(data){
@@ -54,6 +54,7 @@ $(function(){
 			if(flag){
 				layer.msg("稍后跳转",function(){
 					//添加跳转
+					_trun();
 				});
 			}else{
 				layer.msg(message,function(){
@@ -67,6 +68,7 @@ $(function(){
 	pwdmin = 6;
 	//用户注册
 	$("#registForm").on("submit",function(event){
+		
 		event.preventDefault();
 		var username=$.trim($("#user").val());
 		var password=$.trim($("#passwd").val());
@@ -124,7 +126,7 @@ $(function(){
 			type:"post",
 			data:{
 				"username":username,
-				"password":password,
+				"password":_md5(password),
 				"mobile":mobile
 			},
 			dataType:"json"
@@ -135,6 +137,7 @@ $(function(){
 			if(flag){
 				layer.msg("注册成功",function(){
 					//添加跳转
+					_trun();
 				});
 			}else{
 				layer.msg(message,function(){
@@ -175,81 +178,12 @@ function getParam(pname) {
     } 
 }  
 
-
-
-
-/*$(document).ready(function() {
-
-
-	$('#reg').click(function() {
-		if ($('#user').val() == "") {
-			$('#user').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×用户名不能为空</b></font>");
-			return false;
-		}
-		if ($('#user').val().length < 4 || $('#user').val().length > 16) {
-
-			$('#user').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×用户名位4-16字符</b></font>");
-			return false;
-
-		}
-		$.ajax({
-			type: reMethod,
-			url: "/member/ajaxyz.php",
-			data: "uid=" + $("#user").val() + '&temp=' + new Date(),
-			dataType: 'html',
-			success: function(result) {
-
-				if (result.length > 2) {
-					$('#user').focus().css({
-						border: "1px solid red",
-						boxShadow: "0 0 2px red"
-					});$("#userCue").html(result);
-					return false;
-				} else {
-					$('#user').css({
-						border: "1px solid #D7D7D7",
-						boxShadow: "none"
-					});
-				}
-
-			}
-		});
-		if ($('#passwd').val().length < pwdmin) {
-			$('#passwd').focus();
-			$('#userCue').html("<font color='red'><b>×密码不能小于" + pwdmin + "位</b></font>");
-			return false;
-		}
-		if ($('#passwd2').val() != $('#passwd').val()) {
-			$('#passwd2').focus();
-			$('#userCue').html("<font color='red'><b>×两次密码不一致！</b></font>");
-			return false;
-		}
-
-		var sqq = /^[1-9]{1}[0-9]{4,9}$/;
-		if (!sqq.test($('#qq').val()) || $('#qq').val().length < 5 || $('#qq').val().length > 12) {
-			$('#qq').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×QQ号码格式不正确</b></font>");return false;
-		} else {
-			$('#qq').css({
-				border: "1px solid #D7D7D7",
-				boxShadow: "none"
-			});
-			
-		}
-
-		$('#regUser').submit();
-	});
-	
-
-});*/
+function _trun(){
+	window.location.href="/nrg/admin.do";
+}
+/**
+ * 密码加密
+ */
+function _md5(str){
+	return hex_md5(str);
+}
