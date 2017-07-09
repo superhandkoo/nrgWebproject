@@ -40,40 +40,51 @@ $(document).ready(function(){
 		    
 		    
 		    success:function(data){
-		    alert(data);
+		   // alert(data);
 		    var  data1= eval( '(' + data + ')' );
 		    var n1=0;
 		    var n2=0;
 		    var n3=0;
 		    var n4=0;
-		    alert(data1[1]);
+		  //  alert(data1[1]);
 		    $.each(data1,function(index,iteam){
 		    	
 		       if(iteam.typeId==1){
-		    	   alert(1)
+		    	   
 		    	   n1++;
-		        	//$("#img_box").append("<a  href='"+iteam.linkAddress+"'    target='_blank'><img id='img"+(index+1)+"' src='"+iteam.imageUrl+"' /></a>")
-		        	//$("#imgthumb_box").append("<a  href='' class='thumblink' id='imglink"+(index+1)+"' ><img width='1280' height='527'  src='"+iteam.imageUrl+"' /></a>")
+		        	//$("#img_box").append("<a  href='"+iteam.linkAddress+"'    target='_blank'><img id='img"+(n1)+"' src='"+iteam.imageUrl+"' /></a>")
+		        	//$("#imgthumb_box").append("<a  href='' class='thumblink' id='imglink"+(n1)+"' ><img width='1280' height='527'  src='"+iteam.imageUrl+"' /></a>")
 		            $("#img_box img").eq(n1).attr("src",iteam.imageUrl);
 		            $("#imgthumb_box img").eq(n1).attr("src",iteam.imageUrl);
+		            
 		       }
                if(iteam.typeId==2){
             	  
             	 
 		            $("#second_2").append(" <li><img src='"+iteam.imageUrl+"' width='306' height='141' />"+
-		            "<div class='tabwz' style='background:url("+iteam.imageUrl+");'>"+
+		             "<div class='tabwz' style='background:url("+iteam.imageUrl+");'>"+
 		             "<div class='tabt'>"+iteam.title+"</div>"+
-		            "<div class='taba fr'><a href='?solution/tid/257/id/333'>了解更多</a> </div></li>");
-		        // alert(   $("#second_2 img").eq(n2).attr("src"));
-		           // $("#second_2 .tabwz").eq(n2).style("background","url("+iteam.imageUrl+")");
-		          //  $("#second_2 .tabt").eq(n2).html(iteam.title);
+		             "<div class='taba fr'><a href='?solution/tid/257/id/333'>了解更多</a> </div></li>");
+		          // $("#second_2 img").eq(n2).attr("src",iteam.imageUrl);
+		          // $("#second_2 .tabwz").eq(n2).css("background","url("+iteam.imageUrl+")");
+		          // $("#second_2 .tabt").eq(n2).html(iteam.title);
 		            n2++;
 		         }
                if(iteam.typeId==3){
-            	   n3++;
-            	   $("#img_box img").eq(index).attr("src",iteam.imageUrl);
-		            $("#imgthumb_box img").eq(index).attr("src",iteam.imageUrl);
+            	   //n3++;
+            	   $("#second_3").append("<li><a href='?nshow/id/19.html'><img src='http://www.hailin.com/asset/mxupload/up0493619001474161713.jpg'/>"+
+            			   "<div class='botbj' style='background:#649b04;'> <div class='botwz'>"+
+            			   "<strong>生活的温暖解救-浅谈地暖控制</strong><div style='line-height:2;'><span style='color:#FFF0F5'>"+
+            			   "<span style='font-family:lucida sans unicode,lucida grande,sans-serif'>"+
+    	                "<span style='font-size:11px'>地暖是地板辐射采暖的简称，英文为Radiant Floor Heating，是以整个地面为散热器，通过地板辐射层中的热媒，均匀加热整个地面，利用地面自身的蓄热和热量向上辐射的规律由下至上进行传导"+
+    	               "来达到取暖的目的。</span></span></span></div></div>  <div class='bota fr'><img src='images/bot.png' /></div></div></a></li>");
+		        
+		           
+		           
                     }
+            
+               
+               
                if(iteam.typeId==4){
             	   n4++;
             	   $("#img_box img").eq(index).attr("src",iteam.imageUrl);
@@ -101,14 +112,14 @@ $(document).ready(function(){
 
       <div id="img_lanrenzhijia">
           <div id="img_box">
-                 <a href="?into/id/267.html" target="_blank"><img id="img1" src="asset/upload/1.jpg" /></a>
+              <a href="?into/id/267.html" target="_blank"><img id="img1" src="asset/upload/1.jpg" /></a>
               <a href="http://www.hailin.com/?prshow/id/117.html" target="_blank"><img id="img2" src="asset/upload/2.jpg" /></a>
               <a href="http://www.hailin.com/?product/tid/203/id/213.html" target="_blank"><img id="img3" src="asset/upload/3.jpg" /></a>
             <div style="clear:both;"></div>
         </div>
       
      <div id="imgthumb_box"> 
- <a href="" class="thumblink" id="imglink1"><img src="asset/upload/1.jpg" width="1280" height="527" /></a>
+<a href="" class="thumblink" id="imglink1"><img src="asset/upload/1.jpg" width="1280" height="527" /></a>
 <a href="" class="thumblink" id="imglink2"><img src="asset/upload/2.jpg" width="1280" height="527" /></a>
 <a href="" class="thumblink" id="imglink3"><img src="asset/upload/3.jpg" width="1280" height="527" /></a> 
        </div>
@@ -149,7 +160,7 @@ $(document).ready(function(){
     
       <div class="list2">
         <ul id="second_2">
-         <!--     <li><img src="http://www.hailin.com/asset/mxupload/up0007359001473154582.jpg" width="306" height="141" />
+         <!--    <li><img src="http://www.hailin.com/asset/mxupload/up0007359001473154582.jpg" width="306" height="141" />
            <div class="tabwz" style="background:url(asset/mxupload/up0960309001473151623.jpg);">
            <div class="tabt">海林中央空调节能控制系统</div>
            <div class="taba fr"><a href="?solution/tid/257/id/333">了解更多</a></div>
@@ -173,7 +184,7 @@ $(document).ready(function(){
            <div class="tabwz" style="background:url(http://www.hailin.com/asset/mxupload/up0771780001473151583.jpg);">
            <div class="tabt">海林建筑能耗监测与节能控制系统</div>
            <div class="taba fr"><a href="http://www.hailin.com/?solution/tid/347/id/348.html">了解更多</a></div>
-           </div></li> -->
+           </div></li>  -->
         </ul>
       </div>
       <a href="javascript:;" class="prev"></a>
@@ -190,9 +201,9 @@ jQuery(".news").slide({mainCell:".newslb ul",autoPage:true,scroll:1,effect:"left
 
 <div class="h20"></div>
 
-<!--center-->
+<!--center
 <div class="center">
-<!--滑动-->
+
 <div class="graybg">
   <div class="recommend">
 
@@ -242,19 +253,20 @@ jQuery(".news").slide({mainCell:".newslb ul",autoPage:true,scroll:1,effect:"left
 </div>
 
 </div>
-<!--滑动-->
+
 
 
 
 
 </div>
-<!--center-->
+-->
 
 
 <div class="h20"></div>
 
 <div class="bot">
-<ul>
+<ul  id="second_3">
+ 
 <li>
 <a href="?nshow/id/19.html"><img src="http://www.hailin.com/asset/mxupload/up0493619001474161713.jpg" />
 <div class="botbj" style="background:#649b04;">
@@ -268,8 +280,11 @@ jQuery(".news").slide({mainCell:".newslb ul",autoPage:true,scroll:1,effect:"left
 </div>
 </a>
 </li>
+ <!--
 <li><a href="http://www.hailin.com/?prshow/id/118.html"><img src="asset/upload/11.png" /></a></li>
 <li style="padding-right:0px;"><a href="?video.html"><div class="videos"></div><img src="asset/mxupload/up0313193001474161446.jpg" /></a></li>
+-->
+
 </ul>
 </div>
 

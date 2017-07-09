@@ -57,7 +57,7 @@
 .bot .botbj{ width:257px; height:192px; padding:25px; position:absolute; left:0px; top:0px; display:none;}
 .bot .botbj .botwz{ width:100%; height:169px; color:#fff; font-size:14px; line-height:24px;}
 .bot .botbj .bota{ width:23px; height:23px;}
-.bot ul li{ width:307px; height:242px; float:left; padding-right:9px; position:relative;}
+.bot ul li{ width:302px; height:250px; float:left; padding-right:9px; position:relative;}
 .bot ul li .videos{position:absolute;top:80px;left:105px;background:url(../images/videos.png) no-repeat;width:82px;height:83px;}
 
 .footer{ width:100%; height:280px;}
