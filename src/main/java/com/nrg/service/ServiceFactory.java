@@ -15,7 +15,10 @@ public class ServiceFactory {
 
 	@Resource
 	private IDemoService demoService;
-
+	@Resource
+	private IUserService userService;
+	
+	
 	public IDemoService getDemoService() {
 		return demoService;
 	}
@@ -24,4 +27,13 @@ public class ServiceFactory {
 		this.demoService = demoService;
 	}
 
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+	
+	
 }

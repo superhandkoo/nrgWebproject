@@ -103,4 +103,9 @@
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <select id="getUserCount" parameterType="com.nrg.vo.User" resultType="int">
+  	select count(1)
+  	from user
+  	where user.name=#{name} and user.password=#{password}
+  </select>
 </mapper>
