@@ -17,10 +17,12 @@ public class BeanUtil {
 			result.setTotal(page.getTotal());
 			result.setPages(page.getPages());
 		}else{
+			
 			result.setPageNo(1);
 			result.setPageSize(datas.size());
 			result.setRows(datas);
 			result.setTotal(datas.size());
+			
 		}
 		return result;
 	}

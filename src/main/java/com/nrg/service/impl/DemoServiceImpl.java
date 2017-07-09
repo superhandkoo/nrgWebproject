@@ -35,6 +35,16 @@ public class DemoServiceImpl implements IDemoService{
 		return BeanUtil.topagedResult(daoFactory.getImagesMapper().selectAllImages()); 
 	} 
 	
+	/**
+	 * bannner查询  type id=1 bannner
+	 */
+	@Override
+	public List<Images> kindAllImages(String  typeId) {
+		
+		 return daoFactory.getImagesMapper().kindAllImages(typeId); 
+	} 
+	
+	
 	 
 
 }

@@ -3,6 +3,7 @@
 <%@include file="../public/header_top.jsp"%>
 <%@include file="../public/header_middle.jsp"%>
 <div class="container">
+安全而
 	<table class="table table-bordered">
 		<caption>图片表中的数据</caption>
 		<thead>
@@ -55,7 +56,7 @@
 		    coping:false,
 		    callback:function(api){
 		        var page = api.getCurrent(); 
-		        window.location.href="<%=request.getContextPath()%>/demo/img?pageNo="+page+"&pageSize="+5;
+		        window.location.href="<%=request.getContextPath()%>/demo/img.do?pageNo="+page+"&pageSize="+5;
 		    }    
 	   });
 	});

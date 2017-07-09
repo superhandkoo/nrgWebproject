@@ -155,4 +155,13 @@
   <select id="selectAllImages" resultMap="BaseResultMap">
   	select * from website_images
   </select>
+  
+  <!-- 查询种类图片表的数据 -->
+  <select id="kindAllImages" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from website_images
+  	<if test="typeId != null">
+  	  where  website_images.type_id=#{typeId,jdbcType=VARCHAR}
+  	</if>
+  </select>
+  
 </mapper>

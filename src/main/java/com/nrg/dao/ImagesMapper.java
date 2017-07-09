@@ -18,4 +18,5 @@ public interface ImagesMapper {
     int updateByPrimaryKey(Images record);
     
     List<Images> selectAllImages();
+    List<Images> kindAllImages(String typeId);
 }

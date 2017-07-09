@@ -34,8 +34,14 @@ public class DemoController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/img")
+	
 	public ModelAndView getAllimages(Model model,Integer pageNo,Integer pageSize){
 		model.addAttribute("pageBean", serviceFactory.getDemoService().queryAllImage(pageNo, pageSize));
+		//ModelAndView modelview=new ModelAndView();
+		//modelview.setViewName("demo");
+		System.out.println("demo例子");
 		return new ModelAndView("demo");
 	}
+
+
 }
