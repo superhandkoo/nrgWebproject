@@ -8,9 +8,9 @@
     <head>  
     <base href="<%=basePath%>">  
 
-	<title>简洁Bootstrap响应式后台管理系统模板下载</title>	
-	<meta name="keywords" content="Bootstrap模板,Bootstrap3模版,Bootstrap模板下载,Bootstrap后台模板,Bootstrap教程,Bootstrap中文,后台管理系统模板,后台模板下载,后台管理系统,后台管理模板" />
-	<meta name="description" content="JS代码网提供Bootstrap模板,后台管理系统模板,后台管理界面,Bootstrap后台板版下载" />
+	<title>瑞兰德后台管理系统</title>	
+	<meta name="keywords" content="瑞兰德" />
+	<meta name="description" content="瑞兰德环境" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/admin/bootstrap.css" rel="stylesheet">
 	<link href="css/admin/site.css" rel="stylesheet">
@@ -35,6 +35,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">Admin</a>
+          <!-- 
           <div class="btn-group pull-right">
 			<a class="btn" href="/nrg/my-profile.do"><i class="icon-user"></i> Admin</a>
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -46,6 +47,7 @@
               <li><a href="#">退出</a></li>
             </ul>
           </div>
+           -->
           <div class="nav-collapse">
             <ul class="nav">
 			<li><a href="/nrg/admin.do">首页</a></li>
@@ -56,6 +58,7 @@
 					<li><a href="/nrg/users.do">管理用户</a></li>
 				</ul>
 			  </li>
+			  <!--  
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">角色 <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="/nrg/new-role.do">新建角色</a></li>
@@ -64,6 +67,7 @@
 				</ul>
 			  </li>
 			  <li><a href="/nrg/stats.do">统计</a></li>
+			  -->
             </ul>
           </div>
         </div>
@@ -76,27 +80,34 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header"><i class="icon-wrench"></i>banner管理</li>
-             <!-- <li><a href="/nrg/users.do">用户</a></li>
-              <li><a href="/nrg/roles.do">角色</a></li>  -->
-              <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/BannerList.do">宣传图片</a></li>
-              <li class="nav-header"><i class="icon-signal"></i> 商品管理</li>
-              <!--<li class="active"><a href="/nrg/stats.do">通用</a></li>
-              <li><a href="/nrg/user-stats.do">用户</a></li>
-               <li><a href="/nrg/visitor-stats.do">访问者</a></li>-->
-              <li><a href="/nrg/roles.do">我的商品</a></li>
-             
-              <li class="nav-header"><i class="icon-user"></i> 新闻管理</li>
-              <li><a href="/nrg/my-profile.do">新闻编辑</a></li>
-              <li><a href="#">设置</a></li>
-			  <li><a href="#">退出</a></li> 
+                  <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/banner/add.do">添加banner</a></li>
+                  <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/banner/list.do">banner列表</a></li>
+                  <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/BannerList.do">宣传图片</a></li>
+              <li class="nav-header"><i class="icon-solution"></i>解决方案管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/add.do">添加方案</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/list.do">方案列表</a></li>
+              <li class="nav-header"><i class="icon-product"></i>产品中心管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/add.do">添加产品模块</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/list.do">产品中心列表</a></li>
+              <li class="nav-header"><i class="icon-news"></i>新闻管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/add.do">添加新闻模块</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/list.do">新闻模块列表</a></li>
+              <li class="nav-header"><i class="icon-user"></i>用户管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/add.do">添加用户</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/list.do">用户列表</a></li>
+              <li class="nav-header"><i class="icon-about"></i>关于我们</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/about/goNRG.do">走进瑞兰德</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/about/marketing.do">营销网络</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/about/joinUs.do">加入我们</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/about/contactUs.do">联系我们</a></li>
+              <li class="nav-header"><i class="icon-log"></i>操作日志</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/log/list.do">日志列表</a></li>
+                  
             </ul>
           </div>
         </div>
         <div class="span9">
 		  <div class="row-fluid">
-			<div class="page-header">
-				<h1>网站统计 <small></small></h1>
-			</div>
 			<div  style="width:100%;height:800px;">
 			<iframe  id="iframeq_windows"  src="" style="width:100%;height:800px;border: none;">
 			     
