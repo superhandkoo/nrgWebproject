@@ -48,14 +48,21 @@ public class AdminController {
 	public Map<String, Object> loginExcute(HttpServletRequest req){
 		logger.info("后台进行登录");
 		Map<String, Object> map=new HashMap<String, Object>();
-		User user=new User();
+		/*User user=new User();
 		user.setName(req.getParameter("username"));
-		user.setPassword(req.getParameter("password").substring(8,16));
-		Boolean flag=false;
+		user.setPassword(req.getParameter("password").substring(8,16));*/
 		try {
-			flag = serviceFactory.getUserService().checkLoginUser(user);
-			map.put("flag", flag);
-			if(!flag){
+			//flag = serviceFactory.getUserService().checkLoginUser(user);
+			User u= serviceFactory.getUserService().getUserInfoByLogin(req.getParameter("username"), req.getParameter("password").substring(8,16));
+			if(u.getUserId()!=0){
+				map.put("flag", true);
+				//信息加入缓存
+				HttpSession session = req.getSession();
+				session.setAttribute("userId",u.getUserId());
+				//session.setAttribute("userCode", user.getJobNumber());
+				session.setAttribute("userName", u.getName());
+			}else{
+				map.put("flag", false);
 				map.put("message", "您的账户或密码有误");
 			}
 		} catch (Exception e) {

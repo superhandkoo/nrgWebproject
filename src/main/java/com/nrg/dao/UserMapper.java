@@ -1,5 +1,7 @@
 package com.nrg.dao;
 
+import java.util.Map;
+
 import com.nrg.vo.User;
 
 public interface UserMapper {
@@ -16,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     int getUserCount(User user);
+    
+    User getUserByLogin(Map<String, Object> map);
 }

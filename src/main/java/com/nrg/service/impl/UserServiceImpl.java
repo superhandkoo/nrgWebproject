@@ -1,5 +1,8 @@
 package com.nrg.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -48,6 +51,14 @@ public class UserServiceImpl implements IUserService{
 	public int createUser(User user) {
 		// TODO Auto-generated method stub
 		return daoFactory.getUserMapper().insert(user);
+	}
+
+	@Override
+	public User getUserInfoByLogin(String name, String password) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("name", name);
+		map.put("password", password);
+		return daoFactory.getUserMapper().getUserByLogin(map);
 	}
 
 }

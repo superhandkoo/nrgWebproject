@@ -9,6 +9,8 @@ public interface IUserService {
 	 * @return
 	 */
 	public Boolean checkLoginUser(User user);
+	
+	public User getUserInfoByLogin(String name,String password);
 	/**
 	 * 用户名唯一性检测
 	 * @param userName

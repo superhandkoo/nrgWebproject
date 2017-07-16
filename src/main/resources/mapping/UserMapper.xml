@@ -122,4 +122,18 @@
   		</if>
   	</where>
   </select>
+  <select id="getUserInfoByLogin" parameterType="map" resultType="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+    	<if test="name !=null and name!='' ">
+  			and user.name=#{name}
+  		</if>
+  		<if test="password !=null and password !=''">
+  			and user.password=#{password}
+  		</if>
+    	
+    </where>
+  </select>
 </mapper>
