@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,7 @@ import com.nrg.vo.User;
 @Scope(value="prototype")
 @RequestMapping("/admin")
 public class AdminController {
-	
+	public final static Logger logger=LoggerFactory.getLogger(AdminController.class);
 	/**
 	 * service的factory类
 	 */
@@ -32,6 +35,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/loginWeb")
 	public String toLoginWeb(){
+		logger.info("进入后台首页");
 		return "/adminlogin/loginWeb";
 	}
 	/**
@@ -42,6 +46,7 @@ public class AdminController {
 	@RequestMapping("/loginExcute")
 	@ResponseBody
 	public Map<String, Object> loginExcute(HttpServletRequest req){
+		logger.info("后台进行登录");
 		Map<String, Object> map=new HashMap<String, Object>();
 		User user=new User();
 		user.setName(req.getParameter("username"));
@@ -69,6 +74,7 @@ public class AdminController {
 	@RequestMapping("/registExcute")
 	@ResponseBody
 	public Map<String, Object> registExcute(HttpServletRequest req){
+		logger.info("后台进行注册");
 		Map<String, Object> map=new HashMap<String, Object>();
 		try {
 			//用户名唯一性检测
@@ -95,17 +101,13 @@ public class AdminController {
 			user.setName(userName);
 			user.setPassword(password);
 			serviceFactory.getUserService().createUser(user);
-			System.out.println("id:"+user.getUserId());
-			//防入缓存
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			//System.out.println("id:"+user.getUserId());
+			map.put("flag", true);
+			//信息加入缓存
+			HttpSession session = req.getSession();
+			session.setAttribute("userId",user.getUserId());
+			//session.setAttribute("userCode", user.getJobNumber());
+			session.setAttribute("userName", user.getName());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

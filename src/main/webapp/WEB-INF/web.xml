@@ -53,4 +53,17 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<!-- 后台过滤器 -->
+	<filter>  
+	  <filter-name>RequestFilter</filter-name>  
+	  <filter-class>com.nrg.utils.RequestFilter</filter-class>  
+	  <init-param>    
+		<param-name>excludedLogin</param-name>    
+		<param-value>/admin/loginWeb.do,/admin/loginExcute.do,/admin/registExcute.do</param-value>    
+	  </init-param>
+	</filter>  
+	<filter-mapping>  
+	  <filter-name>RequestFilter</filter-name>  
+	  <url-pattern>/admin,/admin/*</url-pattern>  
+	</filter-mapping>
 </web-app>
