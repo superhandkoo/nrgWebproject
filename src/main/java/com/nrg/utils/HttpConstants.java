@@ -20,6 +20,9 @@ public class HttpConstants {
 	public static final String SERVICE_RESPONSE_RESULT_FLAG = "returnCode";
 	
 	// 服务端返回结果失败的标志
+	public static final String SERVICE_RESPONSE_RESULT_SUCCESSMSG = "successMsg";
+	
+	// 服务端返回结果失败的标志
 	public static final String SERVICE_RESPONSE_RESULT_MSG = "errorMsg";
 	
 	// 返回给前段页面成功或失败的标志

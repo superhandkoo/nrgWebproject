@@ -105,6 +105,19 @@ public class BaseController {
 	}
 	
 	/**
+     * 返回成功 输入成功的结果
+     * @param successMsg 成功提示信息
+     * @return 输出成功的JSON格式数据
+     */
+    public String responseSuccess(String successMsg){
+    	JSONObject jsonObj = new JSONObject();
+    	jsonObj.put(HttpConstants.RESPONSE_RESULT_FLAG_ISERROR, false);
+    	jsonObj.put(HttpConstants.SERVICE_RESPONSE_RESULT_SUCCESSMSG, successMsg);
+        logger.info("输出结果：{}", jsonObj.toString());
+        return jsonObj.toString();
+    }
+    
+    /**
      * 返回失败 输入失败的结果
      * @param errorMsg 错误信息
      * @return 输出失败的JSON格式数据
@@ -113,8 +126,8 @@ public class BaseController {
     	JSONObject jsonObj = new JSONObject();
     	jsonObj.put(HttpConstants.RESPONSE_RESULT_FLAG_ISERROR, true);
     	jsonObj.put(HttpConstants.SERVICE_RESPONSE_RESULT_MSG, errorMsg);
-        logger.info("输出结果：{}", jsonObj.toString());
-        return jsonObj.toString();
+    	logger.info("输出结果：{}", jsonObj.toString());
+    	return jsonObj.toString();
     }
 
 }
