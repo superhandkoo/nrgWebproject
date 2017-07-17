@@ -1,19 +1,32 @@
 package com.nrg.service.impl;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nrg.dao.DaoFactory;
-import com.nrg.service.INewsService;
-import com.nrg.service.IUserService;
-import com.nrg.vo.User;
+import com.nrg.dao.NewsMapper;
+import com.nrg.entity.News;
+import com.nrg.service.NewsService;
 
+/**
+ * todo 新闻服务实现类
+ * @author yyy
+ *
+ */
 @Service
-public class NewsServiceImpl implements INewsService{
+public class NewsServiceImpl implements NewsService{
 	
-	@Resource
-	private DaoFactory daoFactory;
+	@Autowired
+	private NewsMapper newsMapper;
+
+	@Override
+	public int addNews(News news) {
+		return newsMapper.insert(news);
+	}
+
+	@Override
+	public News findNewsById(Long id) {
+		return newsMapper.selectByPrimaryKey(id);
+	}
 	
 	
 }
