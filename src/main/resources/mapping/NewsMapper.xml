@@ -35,6 +35,7 @@
 	    where id = #{id}
   	</select>
   	
+  	<!-- 添加新闻信息 -->
   	<insert id="insert" parameterType="com.nrg.entity.News">
   		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
@@ -47,6 +48,21 @@
 	      #{createTime,jdbcType=DATE}, #{status,jdbcType=TINYINT}, #{isDel,jdbcType=TINYINT}, #{sort,jdbcType=TINYINT}
 	      )
   	</insert>
+  	
+  	<!-- 分页查询所有的新闻表的数据 -->
+  	<select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		SELECT
+  		<include refid="Base_Column_List"/>
+  		FROM news
+  		<where>
+  			<if test="condition != null and condition != ''">
+  				and title LIKE CONCAT(CONCAT('%',#{condition}),'%') or name LIKE
+                CONCAT(CONCAT('%',#{condition}),'%') or html_content LIKE CONCAT(CONCAT('%',#{condition}),'%')
+  			</if>
+  		</where>
+  		order by 'asc'
+  	</select>
+  
 <!--   <resultMap id="BaseResultMap" type="com.nrg.vo.News">
     <id column="news_id" jdbcType="INTEGER" property="newsId" />
     <result column="news_type" jdbcType="VARCHAR" property="newsType" />
