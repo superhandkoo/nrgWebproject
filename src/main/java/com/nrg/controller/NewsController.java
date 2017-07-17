@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nrg.entity.News;
 import com.nrg.service.NewsService;
 import com.nrg.utils.BaseController;
+import com.nrg.utils.PagedResult;
 
 /**
  * 新闻管理
@@ -47,6 +49,13 @@ public class NewsController extends BaseController {
 			return responseSuccess("添加成功");
 		}
 		return responseFail("添加失败");
+	}
+	
+	@RequestMapping(value = "/getAllNewsBypage")
+	public Object getAllNewsBypage(Model model,Integer pageNo, Integer pageSize,String condition){
+		PagedResult<News> list = newsService.findNewsByPage(pageNo, pageSize, condition);
+		model.addAttribute("newsList", list);
+		return "news/list";
 	}
 
 }
