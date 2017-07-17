@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nrg.dao.NewsMapper">
-  <resultMap id="BaseResultMap" type="com.nrg.vo.News">
+	<resultMap id="BaseResultMap" type="com.nrg.entity.News">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="introduction" property="introduction" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="isdel" property="isDel" jdbcType="TINYINT"/>
+        <result column="sort" property="sort" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, type, title, name, introduction, img_url, address, create_time, status, isdel ,sort
+    </sql>
+    
+    <sql id="Blob_Column_List">
+    	html_content
+    </sql>
+    
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.entity.News">
+    	<result column="html_content" jdbcType="LONGVARCHAR" property="htmlContent" />
+  	</resultMap>
+  	
+  	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+	    select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+	    from news
+	    where id = #{id}
+  	</select>
+  	
+  	<insert id="insert" parameterType="com.nrg.entity.News">
+  		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	  	insert into news (type, title, name, introduction, img_url, address, 
+	  		html_content, create_time, status, isdel ,sort
+	      )
+	    values (#{type,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+	      #{introduction,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR},
+	      #{createTime,jdbcType=DATE}, #{status,jdbcType=TINYINT}, #{isDel,jdbcType=TINYINT}, #{sort,jdbcType=TINYINT}
+	      )
+  	</insert>
+<!--   <resultMap id="BaseResultMap" type="com.nrg.vo.News">
     <id column="news_id" jdbcType="INTEGER" property="newsId" />
     <result column="news_type" jdbcType="VARCHAR" property="newsType" />
     <result column="news_name" jdbcType="VARCHAR" property="newsName" />
@@ -156,5 +202,5 @@
       addtime = #{addtime,jdbcType=TIMESTAMP},
       sort = #{sort,jdbcType=INTEGER}
     where news_id = #{newsId,jdbcType=INTEGER}
-  </update>
+  </update> -->
 </mapper>
