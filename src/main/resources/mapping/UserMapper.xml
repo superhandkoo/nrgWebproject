@@ -122,7 +122,7 @@
   		</if>
   	</where>
   </select>
-  <select id="getUserInfoByLogin" parameterType="map" resultType="BaseResultMap">
+  <select id="getUserInfoByLogin" parameterType="map" resultMap="BaseResultMap">
   	 select 
     <include refid="Base_Column_List" />
     from user
