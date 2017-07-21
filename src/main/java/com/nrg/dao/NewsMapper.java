@@ -30,7 +30,14 @@ public interface NewsMapper {
 	 * @param condition 条件
 	 * @return
 	 */
-	/*List<News> selectAllNewsByPage(@Param("condition")String condition);*/
+	List<News> selectAllNewsByPage(@Param("condition")String condition);
+	
+	/**
+	 * 修改新闻信息
+	 * @param news
+	 * @return
+	 */
+	int updateNews(News news);
 	
 /*    int deleteByPrimaryKey(Integer newsId);
 
