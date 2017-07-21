@@ -50,7 +50,7 @@
   	</insert>
   	
   	<!-- 分页查询所有的新闻表的数据 -->
-  	<select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	<!-- <select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
   		SELECT
   		<include refid="Base_Column_List"/>
   		FROM news
@@ -61,7 +61,7 @@
   			</if>
   		</where>
   		order by 'asc'
-  	</select>
+  	</select> -->
   
 <!--   <resultMap id="BaseResultMap" type="com.nrg.vo.News">
     <id column="news_id" jdbcType="INTEGER" property="newsId" />
