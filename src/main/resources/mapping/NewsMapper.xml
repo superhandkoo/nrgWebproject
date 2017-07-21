@@ -50,7 +50,7 @@
   	</insert>
   	
   	<!-- 分页查询所有的新闻表的数据 -->
-  	<!-- <select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	<select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
   		SELECT
   		<include refid="Base_Column_List"/>
   		FROM news
@@ -61,7 +61,45 @@
   			</if>
   		</where>
   		order by 'asc'
-  	</select> -->
+  	</select>
+  	
+  	<!-- 修改新闻 -->
+  	<update id="updateNews" parameterType="com.nrg.entity.News">
+	    update user
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDel != null">
+                isdel = #{isDel,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+  </update>
   
 <!--   <resultMap id="BaseResultMap" type="com.nrg.vo.News">
     <id column="news_id" jdbcType="INTEGER" property="newsId" />
