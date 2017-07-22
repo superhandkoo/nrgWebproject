@@ -46,6 +46,7 @@
 		<sfjson.version>2.3</sfjson.version>
 		<!-- jackson版本 -->
 		<jackson.version>1.9.13</jackson.version>
+		<jackson.version1>2.8.0</jackson.version1>
 		
 
 	
@@ -211,6 +212,24 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		
+		<!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version1}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version1}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 		<!-- commons的相关组件 -->
 		<dependency>
