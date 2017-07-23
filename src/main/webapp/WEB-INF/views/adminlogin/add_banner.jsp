@@ -47,19 +47,19 @@
 
 
 	<div class="pad20" style="background-color: #f0f0f0;">
-		<form action="/nrg/admin/updateImg.do" method="post"
-			id="updateForm"
+		<form action="/nrg/admin/AddImg.do" method="post"
+			id="saveForm"
 			data-validator-option="{stopOnError:false, timely:false}">
-			<input  type="hidden"  name="images.imageId"       value="${imgId.imageId}" />
-			<input  type="hidden"  name="images.imageUrl"   id="imageUrl"     value="${imgId.imageUrl}" />
-			<input  type="hidden"  name="images.sort"        value="${imgId.sort}" />
+			
+			<input  type="hidden"  name="images.imageUrl"   id="imageUrl"     value="" />
+			
 			<table style="line-height: 35px;">
 
 
 				<tr>
 					<td>图片标题:</td>
 					<td style="text-align: left;"><input name="images.title"
-						data-rule="required;" value="${imgId.title}" type="text"
+						data-rule="required;" value="" type="text"
 						style="width: 680px;height: 50px" /></td>
 				</tr>
 				<tr id="remove">
@@ -71,7 +71,7 @@
 
 								<div class="SeeImg image_container TxText xzBtn"
 									id="imgReplaceBtn">
-									<img class="myimg" src='${imgId.imageUrl} ' id="file" />
+									<img class="myimg" src='' id="file" />
                                     
 								</div>
 
@@ -94,12 +94,27 @@
 
 						</select></td>
 					</tr>
+					<tr>
+						<td>选择排序:</td>
+						<td style="text-align: left;"><select name="images.sort">
+
+
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+
+
+
+
+						</select></td>
+					</tr>
 				</tr>
 				<tr>
 					<td>图片种类:</td>
 					<td style="text-align: left;"><textarea name="images.describe"
 							id="describe" data-rule="required;"
-							style="width: 680px;height: 150px">${imgId.title}</textarea></td>
+							style="width: 680px;height: 150px"></textarea></td>
 				</tr>
 				<tr>
 					<td>图片链接:</td>
@@ -109,8 +124,8 @@
 			
 			</table>
 				
-                   <input  type="button"   onclick="history.go(-1);" class="btn btn-primary" value="取消"/>
-			       <input  type="submit"   onclick="updateFormSubmit()"  class="btn btn-primary" value="提交"/>
+                   <input  type="button"  onclick="history.go(-1);" class="btn btn-primary" value="取消"/>
+			       <input  type="submit"   onclick="saveFormSubmit()"  class="btn btn-primary" value="提交"/>
 			
 			
 		</form>
@@ -133,7 +148,7 @@
        }
        function saveFormSubmit(){
        	
-         $("#updateForm").submit();
+         $("#saveForm").submit();
        
        }
     

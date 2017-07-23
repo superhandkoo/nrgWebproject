@@ -15,8 +15,13 @@ public interface ImagesMapper {
 
     int updateByPrimaryKeySelective(Images record);
 
-    int updateByPrimaryKey(Images record);
+    int updateByPrimaryKey(Images images);
     
     List<Images> selectAllImages();
     List<Images> kindAllImages(String typeId);
+    List<Images> getSerch(Images images);
+    void updatImgStauts(Images  images);
+    
+  
+
 }

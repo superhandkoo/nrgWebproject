@@ -3307,7 +3307,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             autoClearEmptyNode: true,
             fullscreen: false,
             readonly: false,
-            zIndex: 999,
+            //zIndex: 999,
             enterTag: 'p',
             lang: 'zh-cn',
             langPath: me.options.UMEDITOR_HOME_URL + 'lang/',
