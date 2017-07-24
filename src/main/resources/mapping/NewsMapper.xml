@@ -50,11 +50,12 @@
   	</insert>
   	
   	<!-- 分页查询所有的新闻表的数据 -->
-  	<select id="selectAllNewsByPage" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	<select id="selectAllNewsByPage" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
   		SELECT
   		<include refid="Base_Column_List"/>
   		FROM news
   		<where>
+  			and isdel = '0'
   			<if test="condition != null and condition != ''">
   				and title LIKE CONCAT(CONCAT('%',#{condition}),'%') or name LIKE
                 CONCAT(CONCAT('%',#{condition}),'%') or html_content LIKE CONCAT(CONCAT('%',#{condition}),'%')
@@ -65,7 +66,7 @@
   	
   	<!-- 修改新闻 -->
   	<update id="updateNews" parameterType="com.nrg.entity.News">
-	    update user
+	    update news
         <set>
             <if test="type != null">
                 type = #{type,jdbcType=TINYINT},
@@ -84,6 +85,9 @@
             </if>
             <if test="address != null">
                 address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlContent != null">
+                html_content = #{htmlContent,jdbcType=LONGVARCHAR},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=DATE},
