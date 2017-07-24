@@ -1,7 +1,7 @@
 package com.nrg.service;
 
+import java.util.List;
 import com.nrg.entity.News;
-import com.nrg.utils.PagedResult;
 
 /**
  * todo 新闻服务
@@ -30,7 +30,7 @@ public interface NewsService {
 	 * @param condition 查询条件
 	 * @return
 	 */
-	public PagedResult<News> findNewsByPage(Integer pageNo, Integer pageSize,String condition);
+	public List<News> findNewsByPage(Integer pageNo, Integer pageSize,String condition); // PagedResult<News> 
 	
 	/**
 	 * 修改 新闻信息
