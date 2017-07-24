@@ -40,6 +40,11 @@ public class NewsController extends BaseController {
 		return "news/add";
 	}
 	
+	/**
+	 * 添加新闻信息。
+	 * @param news
+	 * @return
+	 */
 	@RequestMapping(value = "/add")
 	@ResponseBody
 	public Object addNews(News news){
@@ -51,11 +56,64 @@ public class NewsController extends BaseController {
 		return responseFail("添加失败");
 	}
 	
+	/**
+	 * 新闻 分页查询、条件查询分页。
+	 * @param model
+	 * @param pageNo
+	 * @param pageSize
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(value = "/getAllNewsBypage")
 	public Object getAllNewsBypage(Model model,Integer pageNo, Integer pageSize,String condition){
 		PagedResult<News> list = newsService.findNewsByPage(pageNo, pageSize, condition);
 		model.addAttribute("newsList", list);
 		return "news/list";
+	}
+	
+	/**
+	 * 根据id 修改新闻信息。
+	 * @param news
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/update")
+    @ResponseBody
+    public Object update(News news, Long id){
+		news.setId(1L);
+		news.setType(2);
+		news.setTitle("NBA总决赛");
+		news.setName("NBA季后赛");
+		news.setIntroduction("天哪NBA");
+		news.setImgUrl("/nba/lalal");
+		news.setAddress("中国上海");
+		news.setHtmlContent("<div>我的特雷西.麦格雷迪</div>");
+		news.setSort(2);
+		int index = newsService.updateNews(news);
+		if (index > 0) {
+            return responseSuccess("修改成功！");
+        } else {
+            return responseFail("修改失败！");
+        }
+	}
+	
+	/**
+	 * 逻辑删除新闻信息。
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delete")
+    @ResponseBody
+    public Object delete(Long id) {
+		News news = new News();
+		news.setId(id);
+		news.setIsDel(1); // 逻辑删除。isdel->1:删除。
+		int index = newsService.updateNews(news);
+		if (index > 0) {
+            return responseSuccess("删除成功！");
+        } else {
+            return responseFail("删除失败！");
+        }
 	}
 
 }
