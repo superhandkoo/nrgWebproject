@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,5 +25,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     新闻列表 <br>
+    <div>
+    	<c:forEach var="news" items="${page.list }" varStatus="vs">
+    		<div>${news.title }</div>
+    		<div>${news.name }</div>
+    		<div>${news.introduction }</div>
+    		<div${news.address }></div>
+    	</c:forEach>
+    </div>
   </body>
 </html>
