@@ -31,4 +31,11 @@ public interface NewsService {
 	 * @return
 	 */
 	public PagedResult<News> findNewsByPage(Integer pageNo, Integer pageSize,String condition);
+	
+	/**
+	 * 修改 新闻信息
+	 * @param news
+	 * @return
+	 */
+	int updateNews(News news);
 }

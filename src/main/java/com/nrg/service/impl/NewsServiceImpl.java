@@ -39,6 +39,11 @@ public class NewsServiceImpl implements NewsService{
 		PageHelper.startPage(pageNo, pageSize);
 		return BeanUtil.topagedResult(newsMapper.selectAllNewsByPage(condition));
 	}
+
+	@Override
+	public int updateNews(News news) {
+		return newsMapper.updateNews(news);
+	}
 	
 	
 }
