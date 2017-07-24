@@ -1,6 +1,6 @@
 package com.nrg.controller;
 
-import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
 import com.nrg.entity.News;
 import com.nrg.service.NewsService;
 import com.nrg.utils.BaseController;
-import com.nrg.utils.PagedResult;
 
 /**
  * 新闻管理
@@ -66,8 +66,10 @@ public class NewsController extends BaseController {
 	 */
 	@RequestMapping(value = "/getAllNewsBypage")
 	public Object getAllNewsBypage(Model model,Integer pageNo, Integer pageSize,String condition){
-		PagedResult<News> list = newsService.findNewsByPage(pageNo, pageSize, condition);
-		model.addAttribute("newsList", list);
+		List<News> list = newsService.findNewsByPage(pageNo, pageSize, condition);
+		logger.info("获取的值：{}",list);
+		PageInfo<News> page = new PageInfo<News>(list);
+		model.addAttribute("page", page);
 		return "news/list";
 	}
 	
