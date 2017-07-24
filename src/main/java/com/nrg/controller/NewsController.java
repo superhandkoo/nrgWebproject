@@ -80,15 +80,7 @@ public class NewsController extends BaseController {
 	@RequestMapping("/update")
     @ResponseBody
     public Object update(News news, Long id){
-		news.setId(1L);
-		news.setType(2);
-		news.setTitle("NBA总决赛");
-		news.setName("NBA季后赛");
-		news.setIntroduction("天哪NBA");
-		news.setImgUrl("/nba/lalal");
-		news.setAddress("中国上海");
-		news.setHtmlContent("<div>我的特雷西.麦格雷迪</div>");
-		news.setSort(2);
+		news.setId(id);
 		int index = newsService.updateNews(news);
 		if (index > 0) {
             return responseSuccess("修改成功！");
