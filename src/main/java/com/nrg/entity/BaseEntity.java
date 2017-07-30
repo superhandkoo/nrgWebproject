@@ -5,31 +5,29 @@ package com.nrg.entity;
  */
 public abstract class BaseEntity {
     private Integer id;
-    private String createdBy;//创建人id
-    private String updatedBy;//更新人id
+    private Integer createdBy;//创建人id
+    private Integer updatedBy;//更新人id
     private String createdOn;//创建日期
     private String updatedOn;//更新日期
     private Integer isDeleted;//是否删除0未删除，1已删除
 
+    public Integer getCreatedBy() {
+		return createdBy;
+	}
 
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+	public Integer getUpdatedBy() {
+		return updatedBy;
+	}
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public String getCreatedOn() {
+	public String getCreatedOn() {
         return createdOn;
     }
 

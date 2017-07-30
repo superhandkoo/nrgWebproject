@@ -1,160 +1,316 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nrg.dao.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.nrg.vo.Product">
-    <id column="product_id" jdbcType="INTEGER" property="productId" />
-    <result column="product_type" jdbcType="VARCHAR" property="productType" />
-    <result column="product_name" jdbcType="VARCHAR" property="productName" />
-    <result column="product_introduction" jdbcType="VARCHAR" property="productIntroduction" />
-    <result column="product_image" jdbcType="VARCHAR" property="productImage" />
-    <result column="product_address" jdbcType="VARCHAR" property="productAddress" />
-    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nrg.vo.Product">
-    <result column="product_html" jdbcType="LONGVARCHAR" property="productHtml" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    product_id, product_type, product_name, product_introduction, product_image, product_address, 
-    addtime, sort
-  </sql>
-  <sql id="Blob_Column_List">
-    product_html
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from website_product
-    where product_id = #{productId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from website_product
-    where product_id = #{productId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.nrg.vo.Product">
-    insert into website_product (product_id, product_type, product_name, 
-      product_introduction, product_image, product_address, 
-      addtime, sort, product_html
-      )
-    values (#{productId,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{productIntroduction,jdbcType=VARCHAR}, #{productImage,jdbcType=VARCHAR}, #{productAddress,jdbcType=VARCHAR}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{productHtml,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.nrg.vo.Product">
-    insert into website_product
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="productType != null">
-        product_type,
-      </if>
-      <if test="productName != null">
-        product_name,
-      </if>
-      <if test="productIntroduction != null">
-        product_introduction,
-      </if>
-      <if test="productImage != null">
-        product_image,
-      </if>
-      <if test="productAddress != null">
-        product_address,
-      </if>
-      <if test="addtime != null">
-        addtime,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="productHtml != null">
-        product_html,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="productId != null">
-        #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productType != null">
-        #{productType,jdbcType=VARCHAR},
-      </if>
-      <if test="productName != null">
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productIntroduction != null">
-        #{productIntroduction,jdbcType=VARCHAR},
-      </if>
-      <if test="productImage != null">
-        #{productImage,jdbcType=VARCHAR},
-      </if>
-      <if test="productAddress != null">
-        #{productAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="productHtml != null">
-        #{productHtml,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nrg.vo.Product">
-    update website_product
-    <set>
-      <if test="productType != null">
-        product_type = #{productType,jdbcType=VARCHAR},
-      </if>
-      <if test="productName != null">
-        product_name = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productIntroduction != null">
-        product_introduction = #{productIntroduction,jdbcType=VARCHAR},
-      </if>
-      <if test="productImage != null">
-        product_image = #{productImage,jdbcType=VARCHAR},
-      </if>
-      <if test="productAddress != null">
-        product_address = #{productAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="addtime != null">
-        addtime = #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="productHtml != null">
-        product_html = #{productHtml,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where product_id = #{productId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nrg.vo.Product">
-    update website_product
-    set product_type = #{productType,jdbcType=VARCHAR},
-      product_name = #{productName,jdbcType=VARCHAR},
-      product_introduction = #{productIntroduction,jdbcType=VARCHAR},
-      product_image = #{productImage,jdbcType=VARCHAR},
-      product_address = #{productAddress,jdbcType=VARCHAR},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
-      sort = #{sort,jdbcType=INTEGER},
-      product_html = #{productHtml,jdbcType=LONGVARCHAR}
-    where product_id = #{productId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.nrg.vo.Product">
-    update website_product
-    set product_type = #{productType,jdbcType=VARCHAR},
-      product_name = #{productName,jdbcType=VARCHAR},
-      product_introduction = #{productIntroduction,jdbcType=VARCHAR},
-      product_image = #{productImage,jdbcType=VARCHAR},
-      product_address = #{productAddress,jdbcType=VARCHAR},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
-      sort = #{sort,jdbcType=INTEGER}
-    where product_id = #{productId,jdbcType=INTEGER}
-  </update>
+   <resultMap id="productResultMap" type="com.nrg.entity.Product">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="TYPE" property="type" jdbcType="BIGINT"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="INTRODUCTION" property="introduction" jdbcType="VARCHAR"/>
+        <result column="IMAGEURL" property="imageurl" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="HTML" property="html" jdbcType="LONGVARCHAR"/>
+        <result column="SORT" property="sort" jdbcType="TINYINT"/>
+        <result column="CREATED_BY" property="createdBy" jdbcType="BIGINT"/>
+        <result column="UPDATED_BY" property="updatedBy" jdbcType="BIGINT"/>
+        <result column="CREATED_ON" property="createdOn" jdbcType="TIMESTAMP"/>
+        <result column="UPDATED_ON" property="updatedOn" jdbcType="TIMESTAMP"/>
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!-- 列定义 -->
+    <sql id="productColumns">
+        t.ID,
+        t.TYPE,
+        t.NAME,
+        t.INTRODUCTION,
+        t.IMAGEURL,
+        t.ADDRESS,
+        t.HTML,
+        t.SORT,
+        t.CREATED_BY,
+        t.CREATED_ON,
+        t.UPDATED_BY,
+        t.UPDATED_ON,
+        t.IS_DELETED
+    </sql>
+
+    <!-- 查询条件SQL -->
+    <sql id="whereColumnBySelect">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id != null">
+                AND t.ID = #{id}
+            </if>
+            <if test="type != null">
+                AND t.TYPE = #{type}
+            </if>
+            <if test="name != null and name !=''">
+                AND t.NAME = #{name}
+            </if>
+             <if test="introduction != null and introduction !=''">
+                AND t.INTRODUCTION = #{introduction}
+            </if>
+             <if test="imageurl != null and imageurl !=''">
+                AND t.IMAGEURL = #{imageurl}
+            </if>
+             <if test="address != null and address !=''">
+                AND t.ADDRESS = #{type}
+            </if>
+             <if test="html != null and html !=''">
+                AND t.HTML = #{html}
+            </if>
+            <if test="sort != null">
+                AND t.SORT = #{sort}
+            </if>
+            <if test="createdBy != null">
+                AND t.CREATED_BY = #{createdBy}
+            </if>
+            <if test="updatedBy != null">
+                AND t.UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="isDeleted != null">
+                AND t.IS_DELETED = #{isDeleted}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 修改字段SQL -->
+    <sql id="whereColumnByUpdate">
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">
+                t.ID = #{id},
+            </if>
+            <if test="type != null">
+                t.TYPE = #{type},
+            </if>
+             <if test="name != null">
+                t.NAME = #{name},
+            </if>
+            <if test="introduction != null">
+                t.INTRODUCTION = #{introduction},
+            </if>
+            <if test="imageurl != null">
+                t.IMAGEURL = #{imageurl},
+            </if>
+            <if test="address != null">
+                t.ADDRESS = #{address},
+            </if>
+             <if test="html != null">
+                t.HTML = #{html},
+            </if>
+            <if test="sort != null">
+                t.SORT = #{sort},
+            </if>
+            <if test="createdBy != null">
+                t.CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdOn != null">
+                t.CREATED_ON = #{createdOn},
+            </if>
+            <if test="updatedBy != null">
+                t.UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedOn != null">
+                t.UPDATED_ON = #{updatedOn},
+            </if>
+            <if test="isDeleted != null">
+                t.IS_DELETED = #{isDeleted},
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 根据主键ID获取数据 -->
+    <select id="get" parameterType="com.nrg.entity.Product" resultMap="productResultMap">
+        SELECT <include refid="productColumns" />
+        FROM product t
+        WHERE t.ID = #{id}
+    </select>
+
+
+    <!-- 查询列表可以根据分页进行查询 -->
+    <select id="findList" parameterType="com.nrg.entity.Product" resultMap="productResultMap">
+        SELECT
+        <include refid="productColumns" />
+        FROM product t
+        <include refid="whereColumnBySelect" />
+        ORDER BY t.ID DESC
+    </select>
+
+    <!-- 查询所有列表 -->
+    <select id="findAllList" parameterType="com.nrg.entity.Product" resultMap="productResultMap">
+        SELECT
+        <include refid="productColumns" />
+        FROM product t
+        ORDER BY  t.ID DESC
+
+
+
+    </select>
+
+    <!-- 根据条件查询对象 -->
+    <select id="getByEntity" parameterType="com.nrg.entity.Product" resultMap="productResultMap">
+        SELECT <include refid="productColumns" />
+        FROM product t
+        <include refid="whereColumnBySelect"></include>
+    </select>
+
+    <!-- 新增并设置主键ID至参数对象 -->
+    <insert id="insert" parameterType="com.nrg.entity.Product">
+        INSERT INTO product
+        (ID, TYPE, NAME, INTRODUCTION, IMAGEURL, ADDRESS, HTML, SORT,
+        CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON, IS_DELETED)
+        VALUES
+        (#{id}, #{type}, #{name}, #{introduction}, #{imageurl}, #{address}, #{html}, #{sort},
+         #{createdBy}, #{createdOn}, #{updatedBy}, #{updatedOn}, #{isDeleted})
+    </insert>
+
+    <!-- 新增并设置主键ID判断哪些列不为空时，则进行插入 -->
+    <insert id="insertSelective" parameterType="com.nrg.entity.Product" useGeneratedKeys="true" keyProperty="id" >
+
+        INSERT INTO product
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="type != null">
+                TYPE,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="introduction != null">
+                INTRODUCTION,
+            </if>
+            <if test="imageurl != null">
+                IMAGEURL,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="html != null">
+                HTML,
+            </if>
+            <if test="sort != null">
+                SORT,
+            </if>
+            <if test="createdBy != null">
+                CREATED_BY,
+            </if>
+            <if test="createdOn != null">
+                CREATED_ON,
+            </if>
+            <if test="updatedBy != null">
+                UPDATED_BY,
+            </if>
+            <if test="updatedOn != null">
+                UPDATED_ON,
+            </if>
+            <if test="isDeleted != null">
+                IS_DELETED,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="imageurl != null">
+                #{imageurl,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="html != null">
+                #{html,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=TINYINT},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdOn != null">
+                #{createdOn,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedOn != null">
+                #{updatedOn,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 根据主键ID进行修改 -->
+    <update id="update" parameterType="com.nrg.entity.Product">
+        UPDATE product t
+        <include refid="whereColumnByUpdate"></include>
+        <where>
+            t.ID = #{id,jdbcType=BIGINT}
+        </where>
+    </update>
+
+    <!-- 根据条件进行修改 -->
+    <update id="updateByCondition" parameterType="com.nrg.entity.Product">
+        UPDATE product t
+        <include refid="whereColumnByUpdate"></include>
+        <where>${whereSqlParam}</where>
+    </update>
+
+    <!-- 根据主键ID进行逻辑删除 -->
+    <update id="delete" parameterType="com.nrg.entity.Product">
+        UPDATE product t SET
+        t.IS_DELETED = 1
+        WHERE t.ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 根据主键ID进行批量逻辑删除 -->
+    <update id="batchDelete" parameterType="java.util.List">
+        UPDATE product t SET
+        t.IS_DELETED = 1
+        WHERE t.ID IN
+        <foreach item="item" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- 根据条件进行逻辑删除 -->
+    <update id="deleteByEntity" parameterType="com.nrg.entity.Product">
+        UPDATE product t SET
+        t.IS_DELETED = 1
+        <include refid="whereColumnBySelect"/>
+    </update>
+
+    <!-- 根据主键ID进行物理删除 -->
+    <delete id="remove" parameterType="com.nrg.entity.Product">
+        DELETE FROM product t
+        WHERE t.ID = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 根据主键ID进行批量物理删除 -->
+    <delete id="batchRemove" parameterType="java.util.List">
+        DELETE FROM product t
+        WHERE t.ID IN
+        <foreach item="item" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 根据条件进行物理删除 -->
+    <update id="removeByCondition" parameterType="com.nrg.entity.Product">
+        DELETE FROM product t
+        <where>${whereSqlParam}</where>
+    </update>
 </mapper>
