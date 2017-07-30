@@ -1,18 +1,17 @@
 package com.nrg.service.impl;
 
-import javax.annotation.Resource;
+
 
 import org.springframework.stereotype.Service;
 
-import com.nrg.dao.DaoFactory;
-import com.nrg.service.ISolutionService;
-import com.nrg.service.IUserService;
-import com.nrg.vo.User;
 
+
+import com.nrg.entity.Solution;
+import com.nrg.service.ISolutionService;
+
+@SuppressWarnings("unchecked")
 @Service
-public class SolutionServiceImpl implements ISolutionService{
+public class SolutionServiceImpl extends BaseServiceImpl<Solution> implements ISolutionService{
 	
-	@Resource
-	private DaoFactory daoFactory;
 
 }

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nrg.dao.SolutionTypeMapper">
+   <resultMap id="solutionTypeResultMap" type="com.nrg.entity.SolutionType">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR"/>
+        <result column="SORT" property="sort" jdbcType="TINYINT"/>
+        <result column="CREATED_BY" property="createdBy" jdbcType="BIGINT"/>
+        <result column="UPDATED_BY" property="updatedBy" jdbcType="BIGINT"/>
+        <result column="CREATED_ON" property="createdOn" jdbcType="TIMESTAMP"/>
+        <result column="UPDATED_ON" property="updatedOn" jdbcType="TIMESTAMP"/>
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!-- 列定义 -->
+    <sql id="solutionTypeColumns">
+        t.ID,
+        t.TYPE_NAME,
+        t.SORT,
+        t.CREATED_BY,
+        t.CREATED_ON,
+        t.UPDATED_BY,
+        t.UPDATED_ON,
+        t.IS_DELETED
+    </sql>
+
+    <!-- 查询条件SQL -->
+    <sql id="whereColumnBySelect">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id != null">
+                AND t.ID = #{id}
+            </if>
+            <if test="typeName != null">
+                AND t.TYPE_NAME = #{typeName}
+            </if>
+            <if test="sort != null">
+                AND t.SORT = #{sort}
+            </if>
+            <if test="createdBy != null">
+                AND t.CREATED_BY = #{createdBy}
+            </if>
+            <if test="updatedBy != null">
+                AND t.UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="isDeleted != null">
+                AND t.IS_DELETED = #{isDeleted}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 修改字段SQL -->
+    <sql id="whereColumnByUpdate">
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">
+                t.ID = #{id},
+            </if>
+            <if test="typeName != null">
+                t.TYPE_NAME = #{typeName},
+            </if>
+            <if test="sort != null">
+                t.SORT = #{sort},
+            </if>
+            <if test="createdBy != null">
+                t.CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdOn != null">
+                t.CREATED_ON = #{createdOn},
+            </if>
+            <if test="updatedBy != null">
+                t.UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedOn != null">
+                t.UPDATED_ON = #{updatedOn},
+            </if>
+            <if test="isDeleted != null">
+                t.IS_DELETED = #{isDeleted},
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 根据主键ID获取数据 -->
+    <select id="get" parameterType="com.nrg.entity.SolutionType" resultMap="solutionTypeResultMap">
+        SELECT <include refid="solutionTypeColumns" />
+        FROM solution_type t
+        WHERE t.ID = #{id}
+    </select>
+
+
+    <!-- 查询列表可以根据分页进行查询 -->
+    <select id="findList" parameterType="com.nrg.entity.SolutionType" resultMap="solutionTypeResultMap">
+        SELECT
+        <include refid="solutionTypeColumns" />
+        FROM solution_type t
+        <include refid="whereColumnBySelect" />
+        ORDER BY t.ID DESC
+    </select>
+
+    <!-- 查询所有列表 -->
+    <select id="findAllList" parameterType="com.nrg.entity.SolutionType" resultMap="solutionTypeResultMap">
+        SELECT
+        <include refid="solutionTypeColumns" />
+        FROM solution_type t
+        ORDER BY  t.ID DESC
+
+
+
+    </select>
+
+    <!-- 根据条件查询对象 -->
+    <select id="getByEntity" parameterType="com.nrg.entity.SolutionType" resultMap="solutionTypeResultMap">
+        SELECT <include refid="solutionTypeColumns" />
+        FROM solution_type t
+        <include refid="whereColumnBySelect"></include>
+    </select>
+
+    <!-- 新增并设置主键ID至参数对象 -->
+    <insert id="insert" parameterType="com.nrg.entity.SolutionType">
+        INSERT INTO Solution
+        (ID, TYPE_NAME,  SORT,
+        CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON, IS_DELETED)
+        VALUES
+        (#{id}, #{typeName}, #{sort},
+         #{createdBy}, #{createdOn}, #{updatedBy}, #{updatedOn}, #{isDeleted})
+    </insert>
+
+    <!-- 新增并设置主键ID判断哪些列不为空时，则进行插入 -->
+    <insert id="insertSelective" parameterType="com.nrg.entity.SolutionType" useGeneratedKeys="true" keyProperty="id" >
+
+        INSERT INTO Solution
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="typeName != null">
+                TYPE_NAME,
+            </if>
+            <if test="sort != null">
+                SORT,
+            </if>
+            <if test="createdBy != null">
+                CREATED_BY,
+            </if>
+            <if test="createdOn != null">
+                CREATED_ON,
+            </if>
+            <if test="updatedBy != null">
+                UPDATED_BY,
+            </if>
+            <if test="updatedOn != null">
+                UPDATED_ON,
+            </if>
+            <if test="isDeleted != null">
+                IS_DELETED,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="typeName != null">
+                #{typeName,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=TINYINT},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdOn != null">
+                #{createdOn,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedOn != null">
+                #{updatedOn,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 根据主键ID进行修改 -->
+    <update id="update" parameterType="com.nrg.entity.SolutionType">
+        UPDATE Solution t
+        <include refid="whereColumnByUpdate"></include>
+        <where>
+            t.ID = #{id,jdbcType=BIGINT}
+        </where>
+    </update>
+
+    <!-- 根据条件进行修改 -->
+    <update id="updateByCondition" parameterType="com.nrg.entity.SolutionType">
+        UPDATE Solution t
+        <include refid="whereColumnByUpdate"></include>
+        <where>${whereSqlParam}</where>
+    </update>
+
+    <!-- 根据主键ID进行逻辑删除 -->
+    <update id="delete" parameterType="com.nrg.entity.SolutionType">
+        UPDATE Solution t SET
+        t.IS_DELETED = 1
+        WHERE t.ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 根据主键ID进行批量逻辑删除 -->
+    <update id="batchDelete" parameterType="java.util.List">
+        UPDATE Solution t SET
+        t.IS_DELETED = 1
+        WHERE t.ID IN
+        <foreach item="item" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- 根据条件进行逻辑删除 -->
+    <update id="deleteByEntity" parameterType="com.nrg.entity.SolutionType">
+        UPDATE Solution t SET
+        t.IS_DELETED = 1
+        <include refid="whereColumnBySelect"/>
+    </update>
+
+    <!-- 根据主键ID进行物理删除 -->
+    <delete id="remove" parameterType="com.nrg.entity.SolutionType">
+        DELETE FROM solution_type t
+        WHERE t.ID = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 根据主键ID进行批量物理删除 -->
+    <delete id="batchRemove" parameterType="java.util.List">
+        DELETE FROM solution_type t
+        WHERE t.ID IN
+        <foreach item="item" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 根据条件进行物理删除 -->
+    <update id="removeByCondition" parameterType="com.nrg.entity.SolutionType">
+        DELETE FROM solution_type t
+        <where>${whereSqlParam}</where>
+    </update>
+</mapper>
