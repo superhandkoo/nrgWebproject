@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@include file="/WEB-INF/public/header_top.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -23,6 +23,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    添加解决方案 <br>
+<center>
+<form action="/nrg/admin/solutionType/add.do"  onsubmit="return check();" method="post">
+<h3>添加解问类型</h3>
+  <label>内容：</label>
+  <input type="text" name="typeName" id="typeName"/>
+  <br>
+  <label>排序：</label>
+  <select name="sort" id="sort">
+     <option>1</option>
+     <option>2</option>
+     <option>3</option>
+     <option>4</option>
+     <option>5</option>
+     <option>6</option>
+     <option>7</option>
+     <option>8</option>
+     <option>9</option>
+     <option>10</option>
+  </select>
+  <button class="btn btn-primary">提交</button>
+</form>
+</center>
   </body>
+  <script>
+	function check(){
+		document.charset='utf-8';
+		var typeName = $('#typeName').val();
+		if(typeName==""||!typeName){
+			alert("请输入内容");
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+</script>
 </html>

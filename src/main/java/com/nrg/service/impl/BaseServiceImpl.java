@@ -52,6 +52,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     public int save(T entity) {
         return dao.insert(entity);
     }
+    
+    @Override
+    public int insertSelective(T entity) {
+        return dao.insertSelective(entity);
+    }
 
     @Override
     public int update(T entity) {

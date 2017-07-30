@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       <button class="btn btn-primary"   onclick="searchButton()" >查询</button>
       
-      <a class="btn btn-primary"     href="/nrg/admin/toAddImg.do">添加</a>
+      <a class="btn btn-primary"     href="/nrg/admin/solutionType/add.do">添加</a>
      </form>
      <div class="table-responsive">
 	<table class="table table-hover">
@@ -64,13 +64,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 				     </c:if>
 				     <c:if test="${d.isDeleted==0 }">
-				      去下架
+				      已上架
 	
 				     </c:if></th>
 				<td>
-				     编辑
-				     
-				    			</td>
+				     <a  href="javascript:void(0)" data-id="${d.id }" class="batchDelete">删除</a>
+				     <a  href="javascript:void(0)" data-id="${d.id }" class="delete">去下架</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -104,6 +104,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        window.location.href="/nrg/admin/solutionType/list.do?pageNo="+page+"&pageSize="+5;
 		    }    
 	   });
+	   $('.batchDelete').click(function(){
+		   var id = $(this).attr("data-id");
+		   alert(id);
+		   
+	   });
+	   
+       $('.delete').click(function(){
+    	   var id = $(this).attr("data-id");
+    	   alert(id);
+		   
+	   });
 	});
 	function check(){
 		document.charset='utf-8';
@@ -115,6 +126,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return true;
 		}
 	}
+	
+
 	
 </script>
   </body>

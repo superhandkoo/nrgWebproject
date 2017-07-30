@@ -115,7 +115,7 @@
 
     <!-- 新增并设置主键ID至参数对象 -->
     <insert id="insert" parameterType="com.nrg.entity.SolutionType">
-        INSERT INTO Solution
+        INSERT INTO solution_type
         (ID, TYPE_NAME,  SORT,
         CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON, IS_DELETED)
         VALUES
@@ -126,7 +126,7 @@
     <!-- 新增并设置主键ID判断哪些列不为空时，则进行插入 -->
     <insert id="insertSelective" parameterType="com.nrg.entity.SolutionType" useGeneratedKeys="true" keyProperty="id" >
 
-        INSERT INTO Solution
+        INSERT INTO solution_type
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null">
                 ID,
@@ -183,7 +183,7 @@
 
     <!-- 根据主键ID进行修改 -->
     <update id="update" parameterType="com.nrg.entity.SolutionType">
-        UPDATE Solution t
+        UPDATE solution_type t
         <include refid="whereColumnByUpdate"></include>
         <where>
             t.ID = #{id,jdbcType=BIGINT}
@@ -192,21 +192,21 @@
 
     <!-- 根据条件进行修改 -->
     <update id="updateByCondition" parameterType="com.nrg.entity.SolutionType">
-        UPDATE Solution t
+        UPDATE solution_type t
         <include refid="whereColumnByUpdate"></include>
         <where>${whereSqlParam}</where>
     </update>
 
     <!-- 根据主键ID进行逻辑删除 -->
     <update id="delete" parameterType="com.nrg.entity.SolutionType">
-        UPDATE Solution t SET
+        UPDATE solution_type t SET
         t.IS_DELETED = 1
         WHERE t.ID = #{id,jdbcType=BIGINT}
     </update>
 
     <!-- 根据主键ID进行批量逻辑删除 -->
     <update id="batchDelete" parameterType="java.util.List">
-        UPDATE Solution t SET
+        UPDATE solution_type t SET
         t.IS_DELETED = 1
         WHERE t.ID IN
         <foreach item="item" collection="list" index="index" open="("
@@ -217,7 +217,7 @@
 
     <!-- 根据条件进行逻辑删除 -->
     <update id="deleteByEntity" parameterType="com.nrg.entity.SolutionType">
-        UPDATE Solution t SET
+        UPDATE solution_type t SET
         t.IS_DELETED = 1
         <include refid="whereColumnBySelect"/>
     </update>

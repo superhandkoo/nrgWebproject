@@ -10,6 +10,7 @@ public interface IBaseService<T>{
 	public List<T> findAllList(T entity);
 	public List<T> findAllList();
 	public int save(T entity);
+	public int insertSelective(T entity);
     public int update(T entity);
 	public int updateByCondition(T entity);
 	public int delete(T entity);

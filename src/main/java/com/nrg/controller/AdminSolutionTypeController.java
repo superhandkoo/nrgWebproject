@@ -33,7 +33,7 @@ public class AdminSolutionTypeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list")
-	public ModelAndView list(Model model,Integer pageNo,Integer pageSize,@ModelAttribute("solutionType") SolutionType solutionType,HttpServletRequest request){
+	public ModelAndView list(Model model,Integer pageNo,Integer pageSize,@ModelAttribute("solutionType") SolutionType solutionType){
 		ModelAndView mv =new ModelAndView("/solution/typeList");
 		logger.info("进入解决方案类型的分页列表");
 		logger.info(solutionType.getTypeName());
@@ -44,6 +44,13 @@ public class AdminSolutionTypeController {
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public ModelAndView add(Model model){
 		ModelAndView mv =new ModelAndView("/solution/typeAdd");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/add",method = RequestMethod.POST)
+	public ModelAndView adds(Model model,@ModelAttribute("solutionType") SolutionType solutionType){
+		solutionTypeService.insertSelective(solutionType);
+		ModelAndView mv =new ModelAndView("redirect:/admin/solutionType/list.do");
 		return mv;
 	}
 }
