@@ -1,6 +1,6 @@
 package com.nrg.entity;
 
-public class SolutionType {
+public class SolutionType extends BaseEntity{
 	private String typeName;//类型名称
 	private Integer sort;//排序
 	public String getTypeName() {

@@ -84,9 +84,11 @@
                   <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/banner/list.do">banner列表</a></li>
                   <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/BannerList.do">宣传图片</a></li>
               <li class="nav-header"><i class="icon-solution"></i>解决方案管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solutionType/list.do">类型列表</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/add.do">添加方案</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/list.do">方案列表</a></li>
               <li class="nav-header"><i class="icon-product"></i>产品中心管理</li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/productType/list.do">类型列表</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/add.do">添加产品模块</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/list.do">产品中心列表</a></li>
               <li class="nav-header"><i class="icon-news"></i>新闻管理</li>

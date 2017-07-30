@@ -31,7 +31,7 @@
                 AND t.ID = #{id}
             </if>
             <if test="typeName != null">
-                AND t.TYPE_NAME = #{typeName}
+                AND t.TYPE_NAME LIKE '%${typeName}%'
             </if>
             <if test="sort != null">
                 AND t.SORT = #{sort}

@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       <button class="btn btn-primary"   onclick="searchButton()" >查询</button>
       
-      <a class="btn btn-primary"     href="/nrg/admin/solutionType/add.do">添加</a>
+      <a class="btn btn-primary"     href="/nrg/admin/toAddImg.do">添加</a>
      </form>
      <div class="table-responsive">
 	<table class="table table-hover">

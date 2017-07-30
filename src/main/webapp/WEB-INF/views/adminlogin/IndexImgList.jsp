@@ -151,4 +151,3 @@ if('${msg}'!=null&&'${msg}'==0&&'${msg}'!=""){
 	   });
 	});
 </script>
-<%@include file="/WEB-INF/public/footer_bottom.jsp"%>
