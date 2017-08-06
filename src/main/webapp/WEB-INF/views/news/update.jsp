@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div class="form-group">
 	  	<input type="hidden" id="newsId" value="${news.id }">
 	    <label for="name">新闻标题</label>
-	    <input type="text" class="form-control" name="title" id="name" value="${news.title }" placeholder="请输入新闻标题">
+	    <input type="text" class="form-control" name="title" id="title" value="${news.title }" placeholder="请输入新闻标题">
 	  </div>
 	  <div class="form-group">
 	    <label for="name">新闻名称</label>
@@ -78,23 +78,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		function newsSubmit(){
 			var newsId = $("#newsId").val();
-			 $.ajax({
-			   type: "POST",
-			   async:false,
-			   url: "<%=basePath%>/admin/news/updateadd.do?id="+newsId,
-			   data: $("form").serialize(),
-			   success: function(msg){
-			     var data = $.parseJSON(msg);
-			     //console.log(data);
-			     if(data.isError==false){
-			     	alert(data.successMsg);
-			     	window.location.href="<%=basePath%>/admin/news/list.do";
-			     }else{
-			     	alert(data.errorMsg);
-			     }
-			     
-			   }
-			});
+			var title = $.trim($("#title").val());
+			if(title.length == 0){
+				alert("新闻标题不能为空字符");
+			} else{
+				 $.ajax({
+				   type: "POST",
+				   async:false,
+				   url: "<%=basePath%>/admin/news/updateadd.do?id="+newsId,
+				   data: $("form").serialize(),
+				   success: function(msg){
+				     var data = $.parseJSON(msg);
+				     //console.log(data);
+				     if(data.isError==false){
+				     	alert(data.successMsg);
+				     	window.location.href="<%=basePath%>/admin/news/list.do";
+				     }else{
+				     	alert(data.errorMsg);
+				     }
+				     
+				   }
+				});
+			}
 		}
 		
 		$(function(){

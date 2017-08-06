@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form role="form">
 	  <div class="form-group">
 	    <label for="name">新闻标题</label>
-	    <input type="text" class="form-control" name="title" id="name" placeholder="请输入新闻标题">
+	    <input type="text" class="form-control" name="title" id="title" placeholder="请输入新闻标题">
 	  </div>
 	  <div class="form-group">
 	    <label for="name">新闻名称</label>
@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
 	  <div class="form-group">
 	    <label for="name">新闻内容</label><span style="color:red;">(应该放富文本编辑框_TODO)</span>
-	    <textarea name="htmlContent" class="form-control" rows="3"></textarea>
+	    <textarea id="htmlContent" name="htmlContent" class="form-control" rows="3"></textarea>
 	  </div>
 	  
 	  <input type="submit" class="btn btn-default" value="提交" onclick="newsSubmit();" />
@@ -76,21 +76,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		function newsSubmit(){
-			 $.ajax({
-			   type: "POST",
-			   async:false,
-			   url: "<%=basePath%>/admin/news/add.do",
-			   data: $("form").serialize(),
-			   success: function(msg){
-			     var data = $.parseJSON(msg);
-			     //console.log(data);
-			     if(data.isError==false){
-			     	alert(data.successMsg);
-			     }else{
-			     	alert(data.errorMsg);
-			     }
-			   }
-			});
+			var title = $.trim($("#title").val());
+			if(title.length == 0){
+				alert("新闻标题不能为空字符");
+			}else{
+				 $.ajax({
+				   type: "POST",
+				   async:false,
+				   url: "<%=basePath%>/admin/news/add.do",
+				   data: $("form").serialize(),
+				   success: function(msg){
+				     var data = $.parseJSON(msg);
+				     //console.log(data);
+				     if(data.isError==false){
+				     	alert(data.successMsg);
+				     }else{
+				     	alert(data.errorMsg);
+				     }
+				   }
+				}); 
+			}
 		}
 	</script>
   </body>
