@@ -34,7 +34,7 @@ public class NewsServiceImpl implements NewsService{
 	public List<News> findNewsByPage(Integer pageNo, Integer pageSize,
 			String condition) {
 		pageNo = pageNo == null ? 1 : pageNo;
-		pageSize = pageSize == null ? 5 : pageSize;
+		pageSize = pageSize == null ? 10 : pageSize;
 		PageHelper.startPage(pageNo, pageSize);
 		List<News> newsList = newsMapper.selectAllNewsByPage(condition);
 		return newsList;
