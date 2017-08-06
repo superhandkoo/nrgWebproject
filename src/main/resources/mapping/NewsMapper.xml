@@ -61,7 +61,7 @@
                 CONCAT(CONCAT('%',#{condition}),'%') or html_content LIKE CONCAT(CONCAT('%',#{condition}),'%')
   			</if>
   		</where>
-  		order by 'asc'
+  		order by sort,id desc
   	</select>
   	
   	<!-- 修改新闻 -->
