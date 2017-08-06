@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <div class="container">
-     <form action="/nrg/admin/solutionType/list.do"  onsubmit="return check();" method="post">
+     <form action="/nrg/admin/productType/list.do"  onsubmit="return check();" method="post">
         <input  type="hidden" value="10"  name="pageSize" />
         <input  type="hidden" value="${pageBean.pageNo}" name="pageNo" />
       
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       <button class="btn btn-primary"   onclick="searchButton()" >查询</button>
       
-      <a class="btn btn-primary"     href="/nrg/admin/solutionType/add.do">添加</a>
+      <a class="btn btn-primary"     href="/nrg/admin/productType/add.do">添加</a>
      </form>
      <div class="table-responsive">
 	<table class="table table-hover">
@@ -68,8 +68,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 				     </c:if></th>
 				<td>
-				     编辑
-				     
+				     <a  href="javascript:void(0)" data-id="${d.id }" class="batchDelete">删除</a>
+				     <c:if test="${d.isDeleted==0 }">
+				       <a  href="javascript:void(0)" data-id="${d.id }" class="delete">去下架</a>
+				     </c:if>
+				     <a  href="/nrg/admin/productType/update.do?id=${d.id }">修改</a>
 				    			</td>
 			</tr>
 		</c:forEach>
@@ -101,9 +104,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    isHide:true,
 		    callback:function(api){
 		        var page = api.getCurrent(); 
-		        window.location.href="/nrg/admin/solutionType/list.do?pageNo="+page+"&pageSize="+5;
+		        window.location.href="/nrg/admin/productType/list.do?pageNo="+page+"&pageSize="+5;
 		    }    
 	   });
+		$('.batchDelete').click(function(){
+			   var id = $(this).attr("data-id");
+			   $.ajax({
+		            type:"get",
+				    url:"/nrg/admin/productType/remove.do",
+				    contentType : "application/json;charset=UTF-8",
+				    data:{"id":id},
+				    success:function(data){
+				        if(data=="success"){
+				        	alert(data);
+				        	location.reload();
+				        }else{
+				        	alert(data);
+				        }
+				         
+				    },
+				    error : function(XMLHttpRequest, textStatus, errorThrown) {
+				     
+				    }
+		        });
+		   });
+		   
+	       $('.delete').click(function(){
+	    	   var id = $(this).attr("data-id");
+	    	   $.ajax({
+		            type:"get",
+				    url:"/nrg/admin/productType/delete.do",
+				    contentType : "application/json;charset=UTF-8",
+				    data:{"id":id},
+				    success:function(data, textStatus){
+				    	if(data=="success"){
+				        	alert(data);
+				        	location.reload();
+				        }else{
+				        	alert(data);
+				        }
+				    },
+				    error : function(XMLHttpRequest, textStatus, errorThrown) {
+				     
+				    }
+		        });
+			   
+		   });
+		
 	});
 	function check(){
 		document.charset='utf-8';

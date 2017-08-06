@@ -12,8 +12,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,12 +24,14 @@ import com.nrg.entity.SolutionType;
 import com.nrg.service.ISolutionService;
 import com.nrg.service.ISolutionTypeService;
 import com.nrg.service.ServiceFactory;
+import com.nrg.utils.BaseController;
+import com.nrg.utils.DateUtil;
 import com.nrg.vo.User;
 
 @Controller
 @Scope(value="prototype")
 @RequestMapping("/admin/solution")
-public class AdminSolutionController {
+public class AdminSolutionController extends BaseController{
 	public final static Logger logger=LoggerFactory.getLogger(AdminSolutionController.class);
 	
 	
@@ -51,29 +55,65 @@ public class AdminSolutionController {
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
-	public ModelAndView adds(Model model,@ModelAttribute("solution") Solution solution){
+	public ModelAndView adds(Model model,@ModelAttribute("solution") Solution solution,
+		HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		solution.setCreatedBy(Integer.valueOf(userId));
+		solution.setCreatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		solutionService.insertSelective(solution);
 		ModelAndView mv =new ModelAndView("redirect:/admin/solution/list.do");
 		return mv;
 	}
 	
 	/**
-	 * Described删除
+	 * 下架
 	 * @return
 	 */
-	@RequestMapping("/delete")
-	public void delete(Long id){
-		solutionService.deleteById(id);
-		//return "/solution/delete";
+	@RequestMapping(value="/delete",method = RequestMethod.GET)
+	@ResponseBody
+	public String delete(@RequestParam("id") Long id){
+		logger.info(""+id);
+		String code = "success";
+		try {
+			solutionService.deleteById(id);
+		} catch (Exception e) {
+			logger.error("逻辑删除报错：", e);
+			code = "error";
+		} 
+		return code;
 	}
+	
+	
+	/**
+	 * @Description 物理删除
+	 * @param id 主键id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/remove",method=RequestMethod.GET)
+	@ResponseBody
+	public String physicsDelete(@RequestParam("id") Long id) {
+		String code = "success";
+		try {
+			solutionService.remove(id);
+		} catch (Exception e) {
+			logger.error("物理删除报错：", e);
+			code = "error";
+		} 
+		return code;
+	}
+	
 	
 	/**
 	 * Described跳转到修改
 	 * @return
 	 */
 	@RequestMapping(value ="/update",method = RequestMethod.GET)
-	public String update(){
-		return "/solution/update";
+	public ModelAndView update(@ModelAttribute("id")Long id){
+		ModelAndView mv =new ModelAndView("/solution/update");
+		mv.addObject("pageBean", solutionService.get(id));
+		return mv;
 	}
 	
 	/**
@@ -81,7 +121,11 @@ public class AdminSolutionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public String updateadd(@ModelAttribute("solution") Solution solution){
+	public String updateadd(@ModelAttribute("solution") Solution solution,
+		HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		solution.setUpdatedBy(Integer.valueOf(userId));
+		solution.setUpdatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		solutionService.update(solution);
 		return "redirect:/admin/solution/list.do";
 	}

@@ -1,6 +1,8 @@
 package com.nrg.controller;
 
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -10,8 +12,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nrg.entity.ProductType;
@@ -20,11 +25,13 @@ import com.nrg.entity.SolutionType;
 import com.nrg.service.IProductTypeService;
 import com.nrg.service.ISolutionService;
 import com.nrg.service.ISolutionTypeService;
+import com.nrg.utils.BaseController;
+import com.nrg.utils.DateUtil;
 
 @Controller
 @Scope(value="prototype")
 @RequestMapping("/admin/productType")
-public class AdminProductTypeController {
+public class AdminProductTypeController extends BaseController{
 	public final static Logger logger=LoggerFactory.getLogger(AdminProductTypeController.class);
 	
 	
@@ -45,36 +52,71 @@ public class AdminProductTypeController {
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
-	public ModelAndView add(Model model,long id){
+	public ModelAndView add(Model model){
 		ModelAndView mv =new ModelAndView("/product/typeAdd");
-		mv.addObject("pageBean", productTypeService.get(id));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
-	public ModelAndView adds(Model model,@ModelAttribute("productType") ProductType productType){
+	public ModelAndView adds(Model model,@ModelAttribute("productType") ProductType productType,
+		HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		productType.setCreatedBy(Integer.valueOf(userId));
+		productType.setCreatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		productTypeService.insertSelective(productType);
 		ModelAndView mv =new ModelAndView("redirect:/admin/productType/list.do");
 		return mv;
 	}
 	
 	/**
-	 * Described删除
+	 * 下架
 	 * @return
 	 */
-	@RequestMapping("/delete")
-	public void delete(Long id){
-		productTypeService.deleteById(id);
-		//return "/solution/delete";
+	@RequestMapping(value="/delete",method = RequestMethod.GET)
+	@ResponseBody
+	public String delete(@RequestParam("id") Long id){
+		logger.info(""+id);
+		String code = "success";
+		try {
+			productTypeService.deleteById(id);
+		} catch (Exception e) {
+			logger.error("逻辑删除报错：", e);
+			code = "error";
+		} 
+		return code;
 	}
 	
+	
+	/**
+	 * @Description 物理删除
+	 * @param id 主键id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/remove",method=RequestMethod.GET)
+	@ResponseBody
+	public String physicsDelete(@RequestParam("id") Long id) {
+		String code = "success";
+		try {
+			productTypeService.remove(id);
+		} catch (Exception e) {
+			logger.error("物理删除报错：", e);
+			code = "error";
+		} 
+		return code;
+	}
+	
+
 	/**
 	 * Described跳转到修改
 	 * @return
 	 */
 	@RequestMapping(value ="/update",method = RequestMethod.GET)
-	public String update(){
-		return "/product/updateType";
+	public ModelAndView update(@ModelAttribute("id")Long id){
+		ModelAndView mv =new ModelAndView("/product/updateType");
+		mv.addObject("pageBean", productTypeService.get(id));
+		return mv;
 	}
 	
 	/**
@@ -82,7 +124,11 @@ public class AdminProductTypeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public String updateadd(@ModelAttribute("productType") ProductType productType){
+	public String updateadd(@ModelAttribute("productType") ProductType productType,
+		HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		productType.setUpdatedBy(Integer.valueOf(userId));
+		productType.setUpdatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		productTypeService.update(productType);
 		return "redirect:/admin/productType/list.do";
 	}

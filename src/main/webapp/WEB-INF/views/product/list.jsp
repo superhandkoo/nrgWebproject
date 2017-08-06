@@ -73,7 +73,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     </c:if></th>
 				<td>
 				     <a  href="javascript:void(0)" data-id="${d.id }" class="batchDelete">删除</a>
-				     <a  href="javascript:void(0)" data-id="${d.id }" class="delete">去下架</a>
+				     <c:if test="${d.isDeleted==0 }">
+				       <a  href="javascript:void(0)" data-id="${d.id }" class="delete">去下架</a>
+				     </c:if>
+				    
 				</td>
 			</tr>
 		</c:forEach>
@@ -108,17 +111,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        window.location.href="/nrg/admin/product/list.do?pageNo="+page+"&pageSize="+5;
 		    }    
 	   });
-	   $('.batchDelete').click(function(){
-		   var id = $(this).attr("data-id");
-		   alert(id);
+		$('.batchDelete').click(function(){
+			   var id = $(this).attr("data-id");
+			   $.ajax({
+		            type:"get",
+				    url:"/nrg/admin/product/remove.do",
+				    contentType : "application/json;charset=UTF-8",
+				    data:{"id":id},
+				    success:function(data){
+				        if(data=="success"){
+				        	alert(data);
+				        	location.reload();
+				        }else{
+				        	alert(data);
+				        }
+				         
+				    },
+				    error : function(XMLHttpRequest, textStatus, errorThrown) {
+				     
+				    }
+		        });
+		   });
 		   
-	   });
-	   
-       $('.delete').click(function(){
-    	   var id = $(this).attr("data-id");
-    	   alert(id);
-		   
-	   });
+	       $('.delete').click(function(){
+	    	   var id = $(this).attr("data-id");
+	    	   $.ajax({
+		            type:"get",
+				    url:"/nrg/admin/product/delete.do",
+				    contentType : "application/json;charset=UTF-8",
+				    data:{"id":id},
+				    success:function(data, textStatus){
+				    	if(data=="success"){
+				        	alert(data);
+				        	location.reload();
+				        }else{
+				        	alert(data);
+				        }
+				    },
+				    error : function(XMLHttpRequest, textStatus, errorThrown) {
+				     
+				    }
+		        });
+			   
+		   });
 	});
 	function check(){
 		document.charset='utf-8';

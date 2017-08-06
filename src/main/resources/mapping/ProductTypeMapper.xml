@@ -224,13 +224,13 @@
 
     <!-- 根据主键ID进行物理删除 -->
     <delete id="remove" parameterType="com.nrg.entity.ProductType">
-        DELETE FROM product_type t
+        DELETE t FROM product_type t
         WHERE t.ID = #{id,jdbcType=BIGINT}
     </delete>
 
     <!-- 根据主键ID进行批量物理删除 -->
     <delete id="batchRemove" parameterType="java.util.List">
-        DELETE FROM product_type t
+        DELETE t FROM product_type t
         WHERE t.ID IN
         <foreach item="item" collection="list" index="index" open="("
                  separator="," close=")">

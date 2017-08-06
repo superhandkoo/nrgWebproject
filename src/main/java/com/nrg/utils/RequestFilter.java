@@ -24,7 +24,6 @@ public class RequestFilter implements Filter{
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("22222222222");
 		boolean isExcludedPage = false;
 		System.out.println(((HttpServletRequest) request).getServletPath());
 		for (String page : excludedPageArray) {//判断是否在过滤url之外    

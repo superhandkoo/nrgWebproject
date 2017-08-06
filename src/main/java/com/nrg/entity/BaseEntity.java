@@ -4,7 +4,7 @@ package com.nrg.entity;
  * Created by 善于游勇 on 2017/7/24.
  */
 public abstract class BaseEntity {
-    private Integer id;
+    private Long id;
     private Integer createdBy;//创建人id
     private Integer updatedBy;//更新人id
     private String createdOn;//创建日期
@@ -43,15 +43,17 @@ public abstract class BaseEntity {
         this.updatedOn = updatedOn;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public Integer getIsDeleted() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getIsDeleted() {
         return isDeleted;
     }
 

@@ -25,12 +25,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 <center>
 <form action="/nrg/admin/productType/update.do"  onsubmit="return check();" method="post">
-<h3>更新解问类型</h3>
+<h3>更新产品</h3>
+ <label>ID：${pageBean.id }</label>
+  <br>
   <label>内容：</label>
-  <input type="text" name="typeName" id="typeName"/>
+  <input type="text" name="typeName" id="typeName" value="${pageBean.typeName }"/>
+  <br>
+  <label>创建时间：${pageBean.createdOn }</label>
+  <br>
+  <label>是否上架：<c:if test="${pageBean.isDeleted==1 }">
+				      已下架
+				</c:if>
+				<c:if test="${pageBean.isDeleted==0 }">
+				      正上架
+				</c:if>
+</label>
   <br>
   <label>排序：</label>
   <select name="sort" id="sort">
+     <option>${pageBean.sort }</option>
      <option>1</option>
      <option>2</option>
      <option>3</option>
@@ -42,6 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <option>9</option>
      <option>10</option>
   </select>
+  <input type="hidden" value="${pageBean.id }" name="id">
+  <input type="hidden" value="${pageBean.createdOn }" name="createdOn">
+  <input type="hidden" value="${pageBean.createdBy }" name="createdBy">
+  <input type="hidden" value="${pageBean.isDeleted }" name="isDeleted">
+    <br>
   <button class="btn btn-primary">提交</button>
 </form>
 </center>

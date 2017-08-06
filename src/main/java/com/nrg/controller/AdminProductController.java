@@ -1,5 +1,7 @@
 package com.nrg.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +14,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,17 +26,18 @@ import com.nrg.entity.Solution;
 import com.nrg.service.IProductService;
 import com.nrg.service.ISolutionService;
 import com.nrg.service.ServiceFactory;
+import com.nrg.utils.BaseController;
+import com.nrg.utils.DateUtil;
 import com.nrg.vo.User;
 
 @Controller
 @Scope(value="prototype")
 @RequestMapping("/admin/product")
-public class AdminProductController {
+public class AdminProductController extends BaseController{
 	public final static Logger logger=LoggerFactory.getLogger(AdminSolutionController.class);
 	
 	@Autowired
 	private IProductService productService;
-	
 	
 	
 	@RequestMapping(value = "/list")
@@ -50,29 +55,66 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
-	public ModelAndView adds(Model model,@ModelAttribute("product") Product product){
+	public ModelAndView adds(Model model,
+			@ModelAttribute("product") Product product,
+			HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		product.setCreatedBy(Integer.valueOf(userId));
+		product.setCreatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		productService.insertSelective(product);
 		ModelAndView mv =new ModelAndView("redirect:/admin/product/list.do");
 		return mv;
 	}
 	
 	/**
-	 * Described删除
+	 * 下架
 	 * @return
 	 */
-	@RequestMapping("/delete")
-	public void delete(Long id){
-		productService.deleteById(id);
-		//return "/solution/delete";
+	@RequestMapping(value="/delete",method = RequestMethod.GET)
+	@ResponseBody
+	public String delete(@RequestParam("id") Long id){
+		logger.info(""+id);
+		String code = "success";
+		try {
+			productService.deleteById(id);
+		} catch (Exception e) {
+			logger.error("逻辑删除报错：", e);
+			code = "error";
+		} 
+		return code;
 	}
+	
+	
+	/**
+	 * @Description 物理删除
+	 * @param id 主键id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/remove",method=RequestMethod.GET)
+	@ResponseBody
+	public String physicsDelete(@RequestParam("id") Long id) {
+		String code = "success";
+		try {
+			productService.remove(id);
+		} catch (Exception e) {
+			logger.error("物理删除报错：", e);
+			code = "error";
+		} 
+		return code;
+	}
+	
 	
 	/**
 	 * Described跳转到修改
 	 * @return
 	 */
 	@RequestMapping(value ="/update",method = RequestMethod.GET)
-	public String update(){
-		return "/solution/update";
+	public ModelAndView update(@ModelAttribute("id")Long id){
+		ModelAndView mv =new ModelAndView("/product/update");
+		mv.addObject("pageBean", productService.get(id));
+		return mv;
 	}
 	
 	/**
@@ -80,8 +122,12 @@ public class AdminProductController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public String updateadd(@ModelAttribute("product") Product product){
+	public String updateadd(@ModelAttribute("product") Product product,
+		HttpServletRequest request){
+		String userId=String.valueOf(request.getSession().getAttribute("userId"));
+		product.setUpdatedBy(Integer.valueOf(userId));
+		product.setUpdatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		productService.update(product);
-		return "redirect:/admin/solution/list.do";
+		return "redirect:/admin/product/list.do";
 	}
 }

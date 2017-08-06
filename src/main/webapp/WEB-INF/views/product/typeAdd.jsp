@@ -24,14 +24,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <center>
-<form action="/nrg/admin/solutionType/add.do"  onsubmit="return check();" method="post">
-<h3>添加解问类型</h3>
+<form action="/nrg/admin/productType/add.do"  onsubmit="return check();" method="post">
+<h3>添加产品类型</h3>
   <label>内容：</label>
   <input type="text" name="typeName" id="typeName"/>
   <br>
   <label>排序：</label>
   <select name="sort" id="sort">
-     <option>1</option>
+     <option value="1">1</option>
      <option>2</option>
      <option>3</option>
      <option>4</option>
