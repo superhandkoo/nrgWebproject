@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </textarea>
 	  </div>
 	  
-	  <input type="submit" class="btn btn-default" value="提交" onclick="newsSubmit();" />
+	  <input type="button" class="btn btn-default" value="提交" onclick="newsSubmit();" />
 	</form>
 	
 	<script type="text/javascript">
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			     //console.log(data);
 			     if(data.isError==false){
 			     	alert(data.successMsg);
-			     	window.parent.location.href="<%=basePath%>/admin/news/list.do";
+			     	window.location.href="<%=basePath%>/admin/news/list.do";
 			     }else{
 			     	alert(data.errorMsg);
 			     }
