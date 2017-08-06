@@ -15,6 +15,4 @@ public class SolutionType extends BaseEntity{
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
-
-	
 }

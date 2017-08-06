@@ -85,15 +85,13 @@
                   <li><a  href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/BannerList.do">宣传图片</a></li>
               <li class="nav-header"><i class="icon-solution"></i>解决方案管理</li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solutionType/list.do">类型列表</a></li>
-                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/add.do">添加方案</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/solution/list.do">方案列表</a></li>
               <li class="nav-header"><i class="icon-product"></i>产品中心管理</li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/productType/list.do">类型列表</a></li>
-                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/add.do">添加产品模块</a></li>
-                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/list.do">产品中心列表</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/product/list.do">产品列表</a></li>
               <li class="nav-header"><i class="icon-news"></i>新闻管理</li>
-                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/add.do">添加新闻模块</a></li>
-                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/list.do">新闻模块列表</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/add.do">添加新闻</a></li>
+                  <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/list.do">新闻列表</a></li>
               <li class="nav-header"><i class="icon-user"></i>用户管理</li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/add.do">添加用户</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/list.do">用户列表</a></li>

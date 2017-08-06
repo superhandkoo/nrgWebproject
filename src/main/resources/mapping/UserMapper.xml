@@ -122,7 +122,7 @@
   		</if>
   	</where>
   </select>
-  <select id="getUserInfoByLogin" parameterType="map" resultMap="BaseResultMap">
+  <select id="getUserByLogin" parameterType="map" resultMap="BaseResultMap">
   	 select 
     <include refid="Base_Column_List" />
     from user
@@ -133,7 +133,6 @@
   		<if test="password !=null and password !=''">
   			and user.password=#{password}
   		</if>
-    	
     </where>
   </select>
 </mapper>
