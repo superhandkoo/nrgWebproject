@@ -8,10 +8,40 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
+  
   <sql id="Base_Column_List">
-    user_id, name, job_number, password, mobile, addtime
+    user_id, name, job_number, password, mobile, addtime, is_delete
   </sql>
+  
+  <!-- 查询条件SQL -->
+    <sql id="whereColumnBySelect">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null">
+                AND t.user_id = #{userId}
+            </if>
+            <if test="name != null and name !=''">
+                AND t.name LIKE '%${name}%'
+            </if>
+            <if test="jobNumber != null and jobNumber !=''">
+                AND t.job_number LIKE '%${jobNumber}%'
+            </if>
+             <if test="password != null and password !=''">
+                AND t.password = #{password}
+            </if>
+             <if test="mobile != null and mobile !=''">
+                AND t.mobile LIKE '%${mobile}%'
+            </if>
+             <if test="addtime != null and addtime !=''">
+                AND t.addtime = #{addtime}
+            </if>
+             <if test="isDelete != null">
+                AND t.is_delete = #{isDelete}
+            </if>
+        </trim>
+    </sql>
+    
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -19,6 +49,16 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  
+    <!-- 查询列表可以根据分页进行查询 -->
+    <select id="findList" parameterType="com.nrg.vo.User" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user t
+        <include refid="whereColumnBySelect" />
+        ORDER BY t.user_id DESC
+    </select>
+    
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
@@ -55,6 +95,9 @@
       <if test="addtime != null">
         addtime,
       </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -74,6 +117,9 @@
       </if>
       <if test="addtime != null">
         #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -135,4 +181,17 @@
   		</if>
     </where>
   </select>
+    
+     <!-- 根据主键ID进行逻辑删除 -->
+    <update id="deleteById">
+        UPDATE user t SET
+        t.IS_DELETE = 1
+        WHERE t.user_id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <!-- 根据主键ID进行物理删除 -->
+    <delete id="remove">
+        DELETE t FROM user t
+        WHERE t.user_id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

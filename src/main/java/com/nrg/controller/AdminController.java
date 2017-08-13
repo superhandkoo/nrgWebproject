@@ -100,6 +100,7 @@ public class AdminController {
 				map.put("message", "您的手机已被注册");
 				return map;
 			}
+			String jobNumber=req.getParameter("jobNumber");
 			//
 			String password=req.getParameter("password").substring(8,16);
 			User user =new User();
@@ -107,6 +108,7 @@ public class AdminController {
 			user.setMobile(mobile);
 			user.setName(userName);
 			user.setPassword(password);
+			user.setJobNumber(jobNumber);
 			serviceFactory.getUserService().createUser(user);
 			//System.out.println("id:"+user.getUserId());
 			map.put("flag", true);

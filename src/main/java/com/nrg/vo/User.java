@@ -14,8 +14,19 @@ public class User {
     private String mobile;
 
     private Date addtime;
+    
+    private Integer isDelete;
+    
 
-    public Integer getUserId() {
+    public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

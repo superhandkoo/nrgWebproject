@@ -74,9 +74,16 @@ $(function(){
 		var password=$.trim($("#passwd").val());
 		var password2=$.trim($("#passwd2").val());
 		var mobile=$.trim($("#mobile").val());
+		var jobNumber=$.trim($("#jobNumber").val());
 		//判断
 		if(username==null||username==""||username==undefined){
 			layer.msg("请填写用户名",function(){
+				$("#user").focus();
+			});
+			return false;
+		}
+		if(jobNumber==null||jobNumber==""||jobNumber==undefined){
+			layer.msg("请填写工号",function(){
 				$("#user").focus();
 			});
 			return false;
@@ -127,7 +134,8 @@ $(function(){
 			data:{
 				"username":username,
 				"password":_md5(password),
-				"mobile":mobile
+				"mobile":mobile,
+				"jobNumber":jobNumber
 			},
 			dataType:"json"
 		}).done(function(data){

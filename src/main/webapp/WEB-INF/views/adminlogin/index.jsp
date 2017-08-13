@@ -93,7 +93,9 @@
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/toAdd.do">添加新闻</a></li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/news/list.do">新闻列表</a></li>
               <li class="nav-header"><i class="icon-user"></i>用户管理</li>
+              <!-- 
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/add.do">添加用户</a></li>
+              -->
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/user/list.do">用户列表</a></li>
               <li class="nav-header"><i class="icon-about"></i>关于我们</li>
                   <li><a href="javascript:void(0)"  onclick="ahref(this)" url="/nrg/admin/about/goNRG.do">走进瑞兰德</a></li>

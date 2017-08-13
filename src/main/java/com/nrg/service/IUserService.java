@@ -1,5 +1,7 @@
 package com.nrg.service;
 
+import com.nrg.entity.Product;
+import com.nrg.utils.PagedResult;
 import com.nrg.vo.User;
 
 public interface IUserService {
@@ -25,4 +27,12 @@ public interface IUserService {
 	public Boolean checkMobile(String mobile);
 	
 	public int createUser(User user);
+
+	public PagedResult<Product> getList(User user, Integer pageNo, Integer pageSize);
+
+	public int insertSelective(User user);
+
+	public int deleteById(Long id);
+
+	public int remove(Long id);
 }

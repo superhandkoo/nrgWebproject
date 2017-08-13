@@ -78,6 +78,12 @@
 	                    </div>
 	                </li>
 	                <li>
+	                 <label for="jobNumber" class="input-tips2">工号：</label>
+	                    <div class="inputOuter2">
+	                        <input type="text" id="jobNumber" name="jobNumber" maxlength="11" class="inputstyle2"/>
+	                    </div>
+	                </li>
+	                <li>
 	                    <div class="inputArea">
 	                        <input type="submit" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
 	                    </div>
