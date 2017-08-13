@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nrg.entity.Product;
 import com.nrg.entity.Solution;
 import com.nrg.entity.SolutionType;
 import com.nrg.service.ISolutionService;
@@ -50,17 +51,19 @@ public class AdminSolutionController extends BaseController{
 	
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public ModelAndView add(Model model){
-		ModelAndView mv =new ModelAndView("/solution/Add");
+		ModelAndView mv =new ModelAndView("/solution/add");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	public ModelAndView adds(Model model,@ModelAttribute("solution") Solution solution,
 		HttpServletRequest request){
+		
 		String userId=String.valueOf(request.getSession().getAttribute("userId"));
 		solution.setCreatedBy(Integer.valueOf(userId));
 		solution.setCreatedOn(DateUtil.currTime());// new Date()为获取当前系统时间);
 		solutionService.insertSelective(solution);
+		
 		ModelAndView mv =new ModelAndView("redirect:/admin/solution/list.do");
 		return mv;
 	}
@@ -94,6 +97,7 @@ public class AdminSolutionController extends BaseController{
 	@RequestMapping(value="/remove",method=RequestMethod.GET)
 	@ResponseBody
 	public String physicsDelete(@RequestParam("id") Long id) {
+		logger.info(""+id);
 		String code = "success";
 		try {
 			solutionService.remove(id);

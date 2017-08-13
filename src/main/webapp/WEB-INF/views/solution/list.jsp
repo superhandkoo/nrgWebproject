@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       <button class="btn btn-primary"   onclick="searchButton()" >查询</button>
       
-      <a class="btn btn-primary"     href="/nrg/admin/product/add.do">添加</a>
+      <a class="btn btn-primary"     href="/nrg/admin/solution/add.do">添加</a>
      </form>
      <div class="table-responsive">
 	<table class="table table-hover">
@@ -114,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   var id = $(this).attr("data-id");
 			   $.ajax({
 		            type:"get",
-				    url:"/nrg/admin/solutionType/remove.do",
+				    url:"/nrg/admin/solution/remove.do",
 				    contentType : "application/json;charset=UTF-8",
 				    data:{"id":id},
 				    success:function(data){
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	   var id = $(this).attr("data-id");
 	    	   $.ajax({
 		            type:"get",
-				    url:"/nrg/admin/solutionType/delete.do",
+				    url:"/nrg/admin/solution/delete.do",
 				    contentType : "application/json;charset=UTF-8",
 				    data:{"id":id},
 				    success:function(data, textStatus){

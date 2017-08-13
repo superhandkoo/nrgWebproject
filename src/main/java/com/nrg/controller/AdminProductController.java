@@ -50,7 +50,7 @@ public class AdminProductController extends BaseController{
 	
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public ModelAndView add(Model model){
-		ModelAndView mv =new ModelAndView("/product/Add");
+		ModelAndView mv =new ModelAndView("/product/add");
 		return mv;
 	}
 	

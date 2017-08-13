@@ -76,7 +76,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     <c:if test="${d.isDeleted==0 }">
 				       <a  href="javascript:void(0)" data-id="${d.id }" class="delete">去下架</a>
 				     </c:if>
-				    
+				     <!--  
+				    <a  href="/nrg/admin/product/update.do?id=${d.id }">修改</a>
+				    -->
 				</td>
 			</tr>
 		</c:forEach>
