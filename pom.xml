@@ -230,6 +230,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <!-- 百度富文本编辑器 -->
+		<dependency>
+			<groupId>com.baidu.ueditor-utf8-jsp</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.baidu.ueditor-utf8-jsp</groupId>
+			<artifactId>json</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 		<!-- commons的相关组件 -->
 		<dependency>

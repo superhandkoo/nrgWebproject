@@ -21,8 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<script type="text/javascript" language="javascript" src="<%=basePath%>/js/jquery.min.js"></script>
-	<script type="text/javascript">
-	</script>
+	<!-- [Baidu-UEditor] -->
+	<script type="text/javascript" src="UEditor/lang/zh-cn/zh-cn.js" charset="utf-8"></script>
   </head>
   
   <body>
@@ -47,10 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <option value="1">下架</option>
       </select>
 	  
-	  <div class="form-group">
+	 <!--  <div class="form-group">
 	    <label for="inputfile">上传新闻图片</label>
 	    <input type="file" id="inputfile">
-	  </div>
+	  </div> -->
 	  
 	  <label for="name">新闻排序</label>
       <select class="form-control" name="sort">
@@ -67,8 +67,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </select>
 	  
 	  <div class="form-group">
-	    <label for="name">新闻内容</label><span style="color:red;">(应该放富文本编辑框_TODO)</span>
-	    <textarea id="htmlContent" name="htmlContent" class="form-control" rows="3"></textarea>
+	    <label for="name">新闻内容</label><!-- <span style="color:red;">(应该放富文本编辑框_TODO)</span> -->
+	    <!-- <textarea id="htmlContent" name="htmlContent" class="form-control" rows="3"></textarea> -->
+	    <!-- 加载编辑器的容器 -->
+    	<script id="container" type="text/plain">这里写你的初始化内容</script>
+    	<!-- 配置文件 -->
+    	<script type="text/javascript" src="UEditor/ueditor.config.js"></script>
+    	<!-- 编辑器源码文件 -->
+    	<script type="text/javascript" src="UEditor/ueditor.all.js"></script>
+    	<!-- 实例化编辑器 -->
+    	<script type="text/javascript">
+	    	var ue = UE.getEditor('container',{
+	        	autoHeight: false
+	        	,initialFrameWidth : 1000//编辑器宽度，默认1000
+	        	,initialFrameHeight : 500//编辑器高度，默认320
+	        });
+	        
+	        function getHtml(){
+				var html = '';
+				var txt = '';
+				//对编辑器的操作最好在编辑器ready之后再做
+				ue.ready(function() {
+				    html = ue.getContent();
+				});
+				//alert(html);
+				return html;
+			}
+    	</script>
 	  </div>
 	  
 	  <input type="submit" class="btn btn-default" value="提交" onclick="newsSubmit();" />
@@ -76,15 +101,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		function newsSubmit(){
+			var newsHtml = getHtml();
+			//alert(newsHtml);
 			var title = $.trim($("#title").val());
 			if(title.length == 0){
 				alert("新闻标题不能为空字符");
 			}else{
-				 $.ajax({
+				//alert($("form").serialize()+"&htmlContent="+newsHtml);
+				$.ajax({
 				   type: "POST",
 				   async:false,
 				   url: "<%=basePath%>/admin/news/add.do",
-				   data: $("form").serialize(),
+				   data: $("form").serialize()+"&htmlContent="+newsHtml,
 				   success: function(msg){
 				     var data = $.parseJSON(msg);
 				     //console.log(data);
@@ -94,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     	alert(data.errorMsg);
 				     }
 				   }
-				}); 
+				});
 			}
 		}
 	</script>
