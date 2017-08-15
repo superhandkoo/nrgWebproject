@@ -46,10 +46,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <option value="1">下架</option>
       </select>
 	  
-	  <div class="form-group">
+      <!-- <div class="form-group">
 	    <label for="inputfile">上传新闻图片</label>
 	    <input type="file" id="inputfile">
-	  </div>
+	  </div> -->
 	  
 	  <label for="name">新闻排序</label>
       <select id="sort" class="form-control" name="sort">
@@ -66,10 +66,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </select>
 	  
 	  <div class="form-group">
-	    <label for="name">新闻内容</label><span style="color:red;">(应该放富文本编辑框_TODO)</span>
-	    <textarea id="hc" name="htmlContent" class="form-control" rows="3">
+	    <label for="name">新闻内容</label>
+	    <%-- <textarea id="hc" name="htmlContent" class="form-control" rows="3">
 	    	${news.htmlContent }
-	    </textarea>
+	    </textarea> --%>
+	    <!-- 加载编辑器的容器 -->
+    	<script id="container" type="text/plain">${news.htmlContent }</script>
+    	<!-- 配置文件 -->
+    	<script type="text/javascript" src="UEditor/ueditor.config.js"></script>
+    	<!-- 编辑器源码文件 -->
+    	<script type="text/javascript" src="UEditor/ueditor.all.js"></script>
+    	<!-- 实例化编辑器 -->
+    	<script type="text/javascript">
+	    	var ue = UE.getEditor('container',{
+	        	autoHeight: false
+	        	,initialFrameWidth : 1000//编辑器宽度，默认1000
+	        	,initialFrameHeight : 500//编辑器高度，默认320
+	        });
+	        
+	        function getHtml(){
+				var html = '';
+				//对编辑器的操作最好在编辑器ready之后再做
+				ue.ready(function() {
+				    html = ue.getContent();
+				});
+				//alert(html);
+				return html;
+			}
+	        
+	    </script>
 	  </div>
 	  
 	  <input type="button" class="btn btn-default" value="提交" onclick="newsSubmit();" />
@@ -77,6 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		function newsSubmit(){
+			var newsHtml = getHtml();
 			var newsId = $("#newsId").val();
 			var title = $.trim($("#title").val());
 			if(title.length == 0){
@@ -86,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   type: "POST",
 				   async:false,
 				   url: "<%=basePath%>/admin/news/updateadd.do?id="+newsId,
-				   data: $("form").serialize(),
+				   data: $("form").serialize()+"&htmlContent="+newsHtml,
 				   success: function(msg){
 				     var data = $.parseJSON(msg);
 				     //console.log(data);
